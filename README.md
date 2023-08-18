@@ -1,9 +1,11 @@
 # **Ahri_Project** / Romantic_Map (#6)
 
 ## Project Infomation
-|Category|Project ID|Project Name|disclosure scope|
+|Category|Project ID|Project Name|Disclosure Scope|
 |:---:|:---:|:---:|:---:|
 |Ahri_Project|#6|Romantic Map|Public|
+
+The 6th item on the 'Ahri_Project' To Do List.
 
 ## Project Brief
 

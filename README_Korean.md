@@ -61,6 +61,6 @@
 <a href="https://docs.google.com/spreadsheets/d/1_wGeAE6OmdCe5b821GUyuTooV0xRWut6cA69srGbYf0/edit#gid=0" target="_blank">
   <img src="https://img.shields.io/badge/IA-34A853?style=flat-square&logo=googlesheets&logoColor=FFFFFF"/>
 </a>
-<a href="https://www.figma.com/file/7CN5EZ5VQVnBsLA7AqWNmm/%EC%A7%91%EB%8B%A8%EC%A7%80%EC%84%B1-%EC%A7%80%EB%8F%84-Neopi?type=design&node-id=0%3A1&mode=design&t=LvfCVeT8f208NmeU-1" target="_blank">
+<a href="https://www.figma.com/file/3eOsg53BKqmMiH1lCBfjLY/Romantic-Map?type=design&node-id=0%3A1&mode=design&t=JUGS0GNPDJYG7kQl-1" target="_blank">
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=FFFFFF"/>
 </a>

@@ -22,7 +22,7 @@ The 6th item on the 'Ahri_Project' To Do List.
 ### - Core Target
 1. Users in their 10s to 40s
 
-### - Framework
+### - Format
 1. Mobile Application
 
 ### - Condition

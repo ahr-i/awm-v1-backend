@@ -1,37 +1,37 @@
 # **Ahri_Project** / Romantic_Map (#6)
 
-## Project Infomation
+## 1. Project Infomation
 |Category|Project ID|Project Name|Disclosure Scope|
 |:---:|:---:|:---:|:---:|
 |Ahri_Project|#6|Romantic Map|Public|
 
 The 6th item on the 'Ahri_Project' To Do List.
 
-## Project Brief
+## 2. Project Brief
 
-### - Purpose
+### 2.1 Purpose
 1. Provide users with the location information of necessary facilities.
 2. Display location information not shown on standard maps.
 3. Real-time location information updates through user communication.
 
-### - Expected Effect
+### 2.2 Expected Effect
 1. Not only does it show essential location information, but users can also know location information that couldn't be known with existing maps through a place sharing feature among users.
 2. With the map containing a vast amount of data, users can filter and view only the necessary information using the custom feature for their convenience.
 3. By allowing users to directly modify information about a specific facility, information about the place is updated in real-time.
 
-### - Core Target
+### 2.3 Core Target
 1. Users in their 10s to 40s
 
-### - Format
+### 2.4 Format
 1. Mobile Application
 
-### - Condition
+### 2.5 Condition
 1. Design of the program and cloud DB.
 2. Set up a test environment for testing.
 3. In screen configuration, the settings and customer center should be kept to 4 depths or less.
 4. Excluding the settings and customer center in screen configuration, other screens should be kept to 3 depths or less.
 
-### - Function
+### 2.6 Function
 * Place Sharing Feature
   * Real-time sharing of information about places among users.
   * Ability to provide additional explanations about places using photos.
@@ -54,7 +54,7 @@ The 6th item on the 'Ahri_Project' To Do List.
   * Display of distance, route, and time.
   * Display of nearby facilities.
 
-### - Document
+### 2.7 Document
 <a href="https://docs.google.com/spreadsheets/d/1nEh904hfjWP3kfXu41WGr4Z9NcRg2JVtGt0FnFGhD2U/edit#gid=0" target="_blank">
   <img src="https://img.shields.io/badge/SRS-34A853?style=flat-square&logo=googlesheets&logoColor=FFFFFF"/>
 </a>

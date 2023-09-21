@@ -1,11 +1,9 @@
-# **Ahri_Project** / Romantic_Map (#6)
+# **Capstone_Design_Project** / AnyWhere_Map (AWM) (#6)
 
 ## 1. 프로젝트 정보
 |카테고리|프로젝트 ID|프로젝트 이름|공개범위|
 |:---:|:---:|:---:|:---:|
-|Ahri_Project|#6|Romantic Map|공개|
-
-"Ahri_Project" To Do List의 6번째 내용입니다.
+|Capstone Design|#6|AnyWhere Map|공개|
 
 ## 2. 프로젝트 브리프
 

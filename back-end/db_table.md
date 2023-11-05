@@ -10,36 +10,31 @@
 | image_hash | VARCHAR(256) | | |
 | phone_number | VARCHAR(100) | | |
 | email | VARCHAR(100) | | |
-| role | VARCHAR(100) | | |
 | state | INT | | |
+| provider | VARCHAR(100) | | |
+| password | VARCHAR(100) | | |
 | created_at | DATETIME | | |
 
-## 2. user_detail
+## 2. admin
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | password | VARCHAR(100) | | |
+| role | VARCHAR(100) | | |
 
-## 3. auth_user_detail
-| Name | Type | Indexes | Option |
-| :--- | :--- | :--- | :--- |
-| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
-| provider | VARCHAR(100) | | |
-
-
-## 5. favorite_list
+## 3. favorite_list
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | list | JSON | | |
 
-## 6. item_list
+## 4. item_list
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | list | JSON | | |
 
-## 7. black_list
+## 5. black_list
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
@@ -47,7 +42,7 @@
 
 # LOCATION TABLE
 
-## 8. location
+## 6. location
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | location_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
@@ -58,7 +53,7 @@
 | visit_count | INT | | |
 | created_at | DATETIME | | |
 
-## 9. location_info
+## 7. location_info
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | info_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
@@ -72,7 +67,7 @@
 | image_hash | VARCHAR(256) | | |
 | created_at | DATETIME | | |
 
-## 10. location_register
+## 8. location_register
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | register_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
@@ -81,7 +76,7 @@
 | category | VARCHAR(100) | | |
 | created_at | DATETIME | | |
 
-## 11. contributor
+## 9. contributor
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | contributor_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
@@ -92,7 +87,7 @@
 
 # COMMUNITY TABLE
 
-## 12. post
+## 10. post
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | post_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
@@ -106,7 +101,7 @@
 | like | INT | | |
 | created_at | DATETIME | |
 
-## 13. comment
+## 11. comment
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | comment_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
@@ -119,7 +114,7 @@
 
 # CHAT TABLE
 
-## 14. chat
+## 12. chat
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | chat_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
@@ -130,7 +125,7 @@
 
 # SHOP TABLE
 
-## 15. item
+## 13. item
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | item_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |

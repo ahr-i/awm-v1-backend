@@ -8,41 +8,23 @@
 | rank_score | INT | | |
 | image | LONGBLOB | | |
 | image_hash | VARCHAR(256) | | |
-| is_auth | BOOLEAN | | |
-
-## 2. user_info
-| Name | Type | Indexes | Option |
-| :--- | :--- | :--- | :--- |
-| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
-| phone_number | VARCHAR(100) | | |
-| email | VARCHAR(100) | | |
-| role | VARCHAR(100) | | |
-| password | VARCHAR(100) | | |
-| state | INT | | |
-| created_at | DATETIME | | |
-
-## 2.1. oauth_user_info
-| Name | Type | Indexes | Option |
-| :--- | :--- | :--- | :--- |
-| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | phone_number | VARCHAR(100) | | |
 | email | VARCHAR(100) | | |
 | role | VARCHAR(100) | | |
 | state | INT | | |
 | created_at | DATETIME | | |
 
-## 3. user_detail
+## 2. user_detail
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | password | VARCHAR(100) | | |
 
-## 4. auth_user_detail
+## 3. auth_user_detail
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | provider | VARCHAR(100) | | |
-| code | VARCHAR(100) | | |
 
 
 ## 5. favorite_list

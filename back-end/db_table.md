@@ -3,7 +3,7 @@
 ## 1. user
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
+| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | nick_name | VARCHAR(10) | | |
 | rank_score | INT | | |
 | image | LONGBLOB | | |
@@ -13,7 +13,7 @@
 ## 2. user_info
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
+| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | phone_number | VARCHAR(100) | | |
 | email | VARCHAR(100) | | |
 | role | VARCHAR(100) | | |
@@ -23,32 +23,32 @@
 ## 3. user_detail
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
+| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | password | VARCHAR(100) | | |
 
 ## 4. auth_user_detail
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
+| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | provider | VARCHAR(100) | | |
 | code | VARCHAR(100) | | |
 
 ## 5. favorite_list
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
+| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | list | JSON | | |
 
 ## 6. item_list
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
+| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | list | JSON | | |
 
 ## 7. black_list
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
+| user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | list | JSON | | |
 
 # LOCATION TABLE
@@ -56,7 +56,7 @@
 ## 8. location
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
+| location_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
 | category | VARCHAR(100) | | |
 | latitude | DOUBLE | | |
 | longgitude | DOUBLE | | |
@@ -67,7 +67,7 @@
 ## 9. location_info
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
+| info_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
 | user_id |  VARCHAR(100) | | |
 | location_id | INT | | |
 | title | VARCHAR(100) | | |
@@ -81,7 +81,7 @@
 ## 10. location_register
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
+| register_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
 | user_id |  VARCHAR(100) | | |
 | location_id | INT | | |
 | category | VARCHAR(100) | | |
@@ -90,7 +90,7 @@
 ## 11. contributor
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
+| contributor_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
 | user_id |  VARCHAR(100) | | |
 | location_id | INT | | |
 | register_id | INT | | |
@@ -101,7 +101,7 @@
 ## 12. post
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
+| post_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
 | location_id | INT | | |
 | user_id | VARCHAR(100) | | |
 | title | VARCHAR(100) | | |
@@ -115,7 +115,7 @@
 ## 13. comment
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
+| comment_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
 | post_id | INT | | |
 | user_id | VARCHAR(100) | | |
 | comment | VARCHAR(100) | | |
@@ -128,7 +128,7 @@
 ## 14. chat
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
+| chat_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
 | sender | VARCHAR(100) | | |
 | receiver | VARCHAR(100) | | |
 | comment | VARCHAR(100) | | |
@@ -136,10 +136,10 @@
 
 # SHOP TABLE
 
-## 15. shop
+## 15. item
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
-| id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
+| item_id | INT | PRIMARY_KEY | NOT NULL, AUTO_INCREMENT |
 | name | VARCHAR(100) | | |
 | price | VARCHAR(100) | | |
 | detail | VARCHAR(100) | | |

@@ -1,7 +1,7 @@
 package com.example.teamproject.Config;
 
 
-import com.example.teamproject.Service.PrincipalOauth2UserService;
+import com.example.teamproject.Service.SpringSecurityLogin.PrincipalOauth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

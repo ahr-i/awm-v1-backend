@@ -1,4 +1,4 @@
-package com.example.teamproject.Repository;
+package com.example.teamproject.Repository.JpaRepository;
 
 import com.example.teamproject.JpaClass.UserTable.AuthUserDetail;
 import org.springframework.data.jpa.repository.JpaRepository;

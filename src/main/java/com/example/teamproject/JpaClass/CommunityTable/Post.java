@@ -29,7 +29,7 @@ public class Post {
     @Column
     private int report;
     @Column
-    private int like;
+    private int likeCount;
     @CreationTimestamp
     private Date createdAt;
 }

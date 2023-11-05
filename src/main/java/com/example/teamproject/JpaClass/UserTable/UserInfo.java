@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-public class User_Info {
+public class
+UserInfo {
     @Id
     private String userId;
     @Column

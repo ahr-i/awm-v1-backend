@@ -2,7 +2,7 @@ package com.example.teamproject.Service;
 
 import com.example.teamproject.JpaClass.OauthUser_Info;
 import com.example.teamproject.JpaClass.UserTable.AuthUserDetail;
-import com.example.teamproject.Repository.JPARePository;
+//import com.example.teamproject.Repository.JPARePository;
 import com.example.teamproject.Repository.MemberRepository;
 import com.example.teamproject.Repository.Oauth2Repository;
 import com.example.teamproject.Security.PrincipalDetails;
@@ -32,22 +32,20 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         String provider = userRequest.getClientRegistration().getClientId();
 
-        
 
+        AuthUserDetail detail = new AuthUserDetail().builder()
+                .userId(sub)
+                .provider(provider)
+                .code(registrationId)
+                .build();
 
         AuthUserDetail findByUser = oauth2Repository.findAllByUserId(sub);
+
         if(findByUser == null){
-            AuthUserDetail detail = new AuthUserDetail().builder()
-                            .userId(sub)
-                                    .provider(provider)
-                                            .code(registrationId)
-                                                    .build();
-
-
 
             oauth2Repository.save(detail);
         }
 
-        return new PrincipalDetails(oAuth2User.getAttributes());
+        return new PrincipalDetails(oAuth2User.getAttributes(),detail);
     }
 }

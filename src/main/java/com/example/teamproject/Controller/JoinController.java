@@ -1,8 +1,8 @@
 package com.example.teamproject.Controller;
 import com.example.teamproject.JpaClass.UserDto;
+import com.example.teamproject.JpaClass.UserTable.UserDetail;
 import com.example.teamproject.Repository.MemberRepository;
-import com.example.teamproject.Service.MemberService;
-import com.example.teamproject.JpaClass.UserInfo.UserInfo;
+//import com.example.teamproject.Service.MemberService;
 import com.example.teamproject.JpaClass.UserSatuts.UserResponse;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 public class JoinController {
 
-    private final MemberService service;
+    //private final MemberService service;
     private final MemberRepository repository;
     private final BCryptPasswordEncoder encoder;
 
@@ -53,13 +53,13 @@ public class JoinController {
 
     @PostMapping("/join")
     @ResponseBody
-    public ResponseEntity<UserResponse> join(@ModelAttribute UserInfo info){
+    public ResponseEntity<UserResponse> join(@ModelAttribute UserDetail info){
         info.setRole("ROLE_USER");
         String rawPassWord = info.getPassword();
         String encodePassWord = encoder.encode(rawPassWord);
         info.setPassword(encodePassWord);
 
-        UserInfo nickName = repository.findByName(info.getUsername());
+        UserDetail nickName = repository
 
         if(nickName != null){
           return   ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserResponse("400","이미 있는 사용자"));

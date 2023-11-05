@@ -23,7 +23,7 @@ public class Comment {
     @Column
     private int report;
     @Column
-    private int like;
+    private int likeCount;
     @CreationTimestamp
     private Date createdAt;
 }

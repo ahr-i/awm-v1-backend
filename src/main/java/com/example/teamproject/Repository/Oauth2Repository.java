@@ -1,6 +1,7 @@
 package com.example.teamproject.Repository;
 
 import com.example.teamproject.JpaClass.UserTable.AuthUserDetail;
+import com.example.teamproject.Repository.JpaRepository.AuthUserDetailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

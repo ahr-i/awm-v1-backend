@@ -1,8 +1,10 @@
 package com.example.teamproject.Service;
 
 import com.example.teamproject.JpaClass.OauthUser_Info;
+import com.example.teamproject.JpaClass.UserTable.AuthUserDetail;
 import com.example.teamproject.Repository.JPARePository;
 import com.example.teamproject.Repository.MemberRepository;
+import com.example.teamproject.Repository.Oauth2Repository;
 import com.example.teamproject.Security.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -22,34 +24,30 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
      */
 
     private final MemberRepository repository;
+    private final Oauth2Repository oauth2Repository;
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        System.out.println("user request :"+userRequest);
-        System.out.println("액세스 토큰 : "+userRequest.getAccessToken());
-        System.out.println("유저 정보 : "+super.loadUser(userRequest).getAttributes());
-        System.out.println("사용자 : "+userRequest.getClientRegistration().getClientId());
         OAuth2User oAuth2User = super.loadUser(userRequest);
-
         String sub = oAuth2User.getAttribute("sub");
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
         String provider = userRequest.getClientRegistration().getClientId();
-        String email = oAuth2User.getAttribute("email");
-        String role = "ROLE_USER";
-        String name = oAuth2User.getAttribute("name");
 
-        OauthUser_Info bySub = repository.findByEmail(email);
+        
 
-        if(bySub == null){
-            bySub = OauthUser_Info.builder()
-                    .sub("goole_"+sub)
-                    .provider(provider)
-                    .email(email)
-                    .name(name)
-                    .role(role).build();
 
-            repository.oauthUser_save(bySub);
+        AuthUserDetail findByUser = oauth2Repository.findAllByUserId(sub);
+        if(findByUser == null){
+            AuthUserDetail detail = new AuthUserDetail().builder()
+                            .userId(sub)
+                                    .provider(provider)
+                                            .code(registrationId)
+                                                    .build();
 
+
+
+            oauth2Repository.save(detail);
         }
 
-        return new PrincipalDetails(oAuth2User.getAttributes(),bySub);
+        return new PrincipalDetails(oAuth2User.getAttributes());
     }
 }

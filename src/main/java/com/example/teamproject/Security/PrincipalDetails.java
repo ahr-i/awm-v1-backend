@@ -2,6 +2,7 @@ package com.example.teamproject.Security;
 
 import com.example.teamproject.JpaClass.OauthUser_Info;
 import com.example.teamproject.JpaClass.UserInfo.UserInfo;
+import com.example.teamproject.JpaClass.UserTable.AuthUserDetail;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class PrincipalDetails implements UserDetails , OAuth2User {
 
     private UserInfo info;
-    private OauthUser_Info oauthUser_info;
+    private AuthUserDetail details;
 
    //일반 유저 (Oauth 사용자 X)
     private Map<String,Object> attribute;
@@ -25,9 +26,9 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
         this.info = info;
     }
         //Oauth 유저 사용자
-    public PrincipalDetails(Map<String, Object> attribute, OauthUser_Info oauthUser_info) {
+    public PrincipalDetails(Map<String, Object> attribute, AuthUserDetail details) {
         this.attribute = attribute;
-        this.oauthUser_info = oauthUser_info;
+        this.details = details;
     }
 
 
@@ -44,7 +45,7 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
             @Override
             public String getAuthority() {
                 if(info != null) return info.getRole();
-                else if(oauthUser_info != null) return oauthUser_info.getRole();
+                else if(details != null) return details.get
                 else return null;
             }
         });

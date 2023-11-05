@@ -37,6 +37,7 @@
 | :--- | :--- | :--- | :--- |
 | user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | password | VARCHAR(100) | | |
+-->
 
 ## 4. auth_user_detail
 | Name | Type | Indexes | Option |
@@ -44,7 +45,7 @@
 | user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | provider | VARCHAR(100) | | |
 | code | VARCHAR(100) | | |
--->
+
 
 ## 5. favorite_list
 | Name | Type | Indexes | Option |

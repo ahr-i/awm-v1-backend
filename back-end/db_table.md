@@ -31,13 +31,11 @@
 | state | INT | | |
 | created_at | DATETIME | | |
 
-<!--
 ## 3. user_detail
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |
 | user_id | VARCHAR(100) | PRIMARY_KEY | NOT NULL |
 | password | VARCHAR(100) | | |
--->
 
 ## 4. auth_user_detail
 | Name | Type | Indexes | Option |

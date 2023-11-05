@@ -11,13 +11,15 @@ import javax.persistence.*;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String userId;
     @Column
-    private String nick_name;
-
-    rank_score	INT
-    image	LONGBLOB
-    image_hash	VARCHAR(256)
-    is_auth
+    private String nickName;
+    @Column
+    private int rankScore;
+    @Lob
+    private byte[] image;
+    @Column
+    private String imageHash;
+    @Column
+    private boolean isAuth;
 }

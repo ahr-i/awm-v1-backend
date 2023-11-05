@@ -98,7 +98,7 @@
 | image | LONGBLOB | | |
 | image_hash | VARCHAR(256) | | |
 | report | INT | | |
-| like | INT | | |
+| like_count | INT | | |
 | created_at | DATETIME | |
 
 ## 11. comment
@@ -109,7 +109,7 @@
 | user_id | VARCHAR(100) | | |
 | comment | VARCHAR(100) | | |
 | report | INT | | |
-| like | INT | | |
+| like_count | INT | | |
 | created_at | DATETIME | |
 
 # CHAT TABLE

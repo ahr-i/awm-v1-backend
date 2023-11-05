@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="273e9d22-549e-4805-8e20-da5ce33baac9" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Service/SpringSecurityLogin/PrincipalOauth2UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/TeamProJect.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_Korean.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_Korean.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/a.md" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/a.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/db_table.md" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/db_table.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/test.md" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/test.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Controller/JoinController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Controller/JoinController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/OauthUser_Info$OauthUser_InfoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/OauthUser_Info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/QOauthUser_Info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserInfo/QUserInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserInfo/UserInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/AuthUserDetail$AuthUserDetailBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/AuthUserDetail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/QAuthUserDetail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/QUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/QUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/QUserDetail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/QUser_Info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/UserDetail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/JpaClass/UserTable/User_Info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Repository/AuthUserDetailRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Repository/JPARePository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Repository/MemberRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Repository/Oauth2Repository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Repository/OauthRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Security/PrincipalDetails$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Security/PrincipalDetails$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Security/PrincipalDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Security/PrincipalDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Service/MemberService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Service/PrincipalDetailService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/teamproject/Service/PrincipalOauth2UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/base-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/css/base-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/js/report.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/js/report.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/joinForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/joinForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/loginForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/loginForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Post.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/QPost.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Controller/JoinController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Controller/JoinController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/ChatTable/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/ChatTable/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/CommunityTable/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/CommunityTable/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/CommunityTable/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/CommunityTable/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/LocationTable/Contributor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/LocationTable/Contributor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/LocationTable/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/LocationTable/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/LocationTable/LocationInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/LocationTable/LocationInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/LocationTable/LocationRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/LocationTable/LocationRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/OauthUser_Info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/ShopTable/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/ShopTable/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/AuthUserDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/BlackList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/BlackList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/FavoriteList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/FavoriteList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/ItemList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/ItemList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/UserDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/JpaClass/UserTable/UserInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Repository/JpaRepository/AuthUserDetailRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Repository/JpaRepository/OauthRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Repository/JpaRepository/UserInfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Repository/JpaRepository/UserInfoRepsitoryImple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Repository/MemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Repository/Oauth2Repository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Security/PrincipalDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Security/PrincipalDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Service/MemberService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Service/PrincipalDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Service/SpringSecurityLogin/PrincipalDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/Service/PrincipalOauth2UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamproject/TeamProJectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamproject/TeamProJectApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/joinForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/joinForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/loginForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/loginForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/teamproject/TeamProJectApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/teamproject/TeamProJectApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2XllbYeyWgS7TzpI2XB3blVKz5F" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/ahri/Downloads/git/any-where-map",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="TeamProJectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="TeamProJect.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.teamproject.TeamProJectApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="273e9d22-549e-4805-8e20-da5ce33baac9" name="변경" comment="" />
+      <created>1699211618892</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699211618892</updated>
+      <workItem from="1699211619904" duration="41000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

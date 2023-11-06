@@ -1,7 +1,5 @@
 # USER TABLE
 
-# USER TABLE
-
 ## 1. user
 | Name | Type | Indexes | Option |
 | :--- | :--- | :--- | :--- |

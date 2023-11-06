@@ -1,9 +1,8 @@
 package com.example.teamproject.Security;
 
-import com.example.teamproject.JpaClass.OauthUser_Info;
 //import com.example.teamproject.JpaClass.UserInfo.UserInfo;
-import com.example.teamproject.JpaClass.UserTable.AuthUserDetail;
-import com.example.teamproject.JpaClass.UserTable.UserDetail;
+//import com.example.teamproject.JpaClass.Admin;
+import com.example.teamproject.JpaClass.UserTable.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -18,19 +17,27 @@ import java.util.Map;
  */
 public class PrincipalDetails implements UserDetails , OAuth2User {
 
-    private UserDetail userDetail;
-    private AuthUserDetail details;
+    private User userInfo;
+    private User details;
+    //private Admin admin;
+
 
    //일반 유저 (Oauth 사용자 X)
     private Map<String,Object> attribute;
-    public PrincipalDetails(UserDetail info) {
-        this.userDetail = info;
+    public PrincipalDetails(User info) {
+        this.userInfo = info;
     }
         //Oauth 유저 사용자
-    public PrincipalDetails(Map<String, Object> attribute, AuthUserDetail details) {
+    public PrincipalDetails(Map<String, Object> attribute, User details) {
         this.attribute = attribute;
         this.details = details;
     }
+    /*
+    public PrincipalDetails(Admin admin){
+        this.admin = admin;
+    }
+
+     */
 
 
 
@@ -45,7 +52,7 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                if(userDetail != null) return "ROLE_USER";
+                if(userInfo != null) return "ROLE_USER";
                 else if(details != null) return "ROLE_USER";
                 else return null;
             }
@@ -55,14 +62,14 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
 
     @Override
     public String getPassword() {
-        if(userDetail != null) return userDetail.getPassword();
+        if(userInfo != null) return userInfo.getPassword();
         else return null;
     }
 
     @Override
     public String getUsername() {
-        if(userDetail != null){
-            return userDetail.getUserId();
+        if(userInfo != null){
+            return userInfo.getUserId();
         }else if(details != null) {
             return details.getUserId();
         }else return null;

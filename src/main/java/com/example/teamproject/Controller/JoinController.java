@@ -1,22 +1,16 @@
 package com.example.teamproject.Controller;
-import com.example.teamproject.JpaClass.UserDto;
-import com.example.teamproject.JpaClass.UserTable.UserDetail;
-import com.example.teamproject.Repository.MemberRepository;
-//import com.example.teamproject.Service.MemberService;
+import com.example.teamproject.Dto.UserDto;
+//import com.example.teamproject.JpaClass.Admin;
+import com.example.teamproject.JpaClass.UserTable.User;
 import com.example.teamproject.JpaClass.UserSatuts.UserResponse;
-import lombok.Getter;
+import com.example.teamproject.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,11 +18,11 @@ import java.util.List;
 public class JoinController {
 
     //private final MemberService service;
-    private final MemberRepository repository;
     private final BCryptPasswordEncoder encoder;
+    private final UserService service;
 
     @GetMapping("/joinForm")
-    public String joinForm(){
+    String joinForm(){
         return "joinForm";
     }
     @GetMapping("/user")
@@ -53,19 +47,20 @@ public class JoinController {
 
     @PostMapping("/join")
     @ResponseBody
-    public ResponseEntity<UserResponse> join(@ModelAttribute UserDetail info){
-        info.setRole("ROLE_USER");
+    public ResponseEntity<UserResponse> join(@ModelAttribute User info){
         String rawPassWord = info.getPassword();
         String encodePassWord = encoder.encode(rawPassWord);
         info.setPassword(encodePassWord);
+        User byUserInfo = service.findByUser(info);
 
-        UserDetail nickName = repository
 
-        if(nickName != null){
+
+        if(byUserInfo != null){
           return   ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserResponse("400","이미 있는 사용자"));
         }
         else {
-            repository.save(info);
+            User user = new UserDto().TransferUser(info);
+            service.join(user);
             return ResponseEntity.ok(new UserResponse("200","회원가입 성공"));
         }
     }

@@ -1,0 +1,245 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 264241152 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3613), pid=16624, tid=14148
+#
+# JRE version:  (17.0.9+8) (build )
+# Java VM: OpenJDK 64-Bit Server VM (17.0.9+8-LTS, mixed mode, emulated-client, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:TieredStopAtLevel=1 -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -javaagent:C:\Users\WooHeeSeop\Desktop\programming\intellij\IntelliJ IDEA 2022.2.1\lib\idea_rt.jar=51326:C:\Users\WooHeeSeop\Desktop\programming\intellij\IntelliJ IDEA 2022.2.1\bin -Dfile.encoding=UTF-8 com.example.teamproject.TeamProJectApplication
+
+Host: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, 8 cores, 15G,  Windows 11 , 64 bit Build 22621 (10.0.22621.2428)
+Time: Mon Nov 13 19:03:17 2023  Windows 11 , 64 bit Build 22621 (10.0.22621.2428) elapsed time: 0.022070 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000002ce5b8021a0):  JavaThread "Unknown thread" [_thread_in_vm, id=14148, stack(0x000000faf3900000,0x000000faf3a00000)]
+
+Stack: [0x000000faf3900000,0x000000faf3a00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x67cb49]
+V  [jvm.dll+0x8344da]
+V  [jvm.dll+0x835f9e]
+V  [jvm.dll+0x836603]
+V  [jvm.dll+0x247b5f]
+V  [jvm.dll+0x679969]
+V  [jvm.dll+0x66e2ba]
+V  [jvm.dll+0x307a5b]
+V  [jvm.dll+0x30ef06]
+V  [jvm.dll+0x35ecee]
+V  [jvm.dll+0x35ef1f]
+V  [jvm.dll+0x2de658]
+V  [jvm.dll+0x2df5c4]
+V  [jvm.dll+0x805d51]
+V  [jvm.dll+0x36cb51]
+V  [jvm.dll+0x7e47dc]
+V  [jvm.dll+0x3f03cf]
+V  [jvm.dll+0x3f2001]
+C  [jli.dll+0x528f]
+C  [ucrtbase.dll+0x29363]
+C  [KERNEL32.DLL+0x1257d]
+C  [ntdll.dll+0x5aa78]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ff85e86ee98, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x000002ce5b86b170 GCTaskThread "GC Thread#0" [stack: 0x000000faf3a00000,0x000000faf3b00000] [id=9248]
+  0x000002ce5b87cc90 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000faf3b00000,0x000000faf3c00000] [id=38852]
+  0x000002ce5b87de50 ConcurrentGCThread "G1 Conc#0" [stack: 0x000000faf3c00000,0x000000faf3d00000] [id=28804]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ff85e02f097]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x000002ce5b7fecd0] Heap_lock - owner thread: 0x000002ce5b8021a0
+
+Heap address: 0x0000000704400000, size: 4028 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+<Empty>
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x0000000704400000, 0x0000000800000000)
+  region size 2048K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ff85e4168f9]
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.016 Loaded shared library C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff78c420000 - 0x00007ff78c42e000 	C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\java.exe
+0x00007ff8e7d90000 - 0x00007ff8e7fa7000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ff8e6c50000 - 0x00007ff8e6d14000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ff8e5230000 - 0x00007ff8e55d6000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ff8e5110000 - 0x00007ff8e5221000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ff8cb1a0000 - 0x00007ff8cb1b7000 	C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\jli.dll
+0x00007ff8e6940000 - 0x00007ff8e6aed000 	C:\WINDOWS\System32\USER32.dll
+0x00007ff8e55e0000 - 0x00007ff8e5606000 	C:\WINDOWS\System32\win32u.dll
+0x00007ff8e7ca0000 - 0x00007ff8e7cc9000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ff8e5680000 - 0x00007ff8e5798000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ff8e5860000 - 0x00007ff8e58fa000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ff8caf60000 - 0x00007ff8caf7b000 	C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\VCRUNTIME140.dll
+0x00007ff8cdff0000 - 0x00007ff8ce283000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.2361_none_2712ced57382f843\COMCTL32.dll
+0x00007ff8e6db0000 - 0x00007ff8e6e57000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ff8e7b10000 - 0x00007ff8e7b41000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ff8d91b0000 - 0x00007ff8d91bc000 	C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\vcruntime140_1.dll
+0x00007ff8b8660000 - 0x00007ff8b86ed000 	C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\msvcp140.dll
+0x00007ff85dd40000 - 0x00007ff85e9a1000 	C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\server\jvm.dll
+0x00007ff8e6770000 - 0x00007ff8e6820000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ff8e6ba0000 - 0x00007ff8e6c46000 	C:\WINDOWS\System32\sechost.dll
+0x00007ff8e6820000 - 0x00007ff8e6937000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ff8e4700000 - 0x00007ff8e474d000 	C:\WINDOWS\SYSTEM32\POWRPROF.dll
+0x00007ff8df320000 - 0x00007ff8df354000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ff8d0480000 - 0x00007ff8d0489000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ff8e63b0000 - 0x00007ff8e6421000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ff8da520000 - 0x00007ff8da52a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ff8e4650000 - 0x00007ff8e4663000 	C:\WINDOWS\SYSTEM32\UMPDC.dll
+0x00007ff8e4480000 - 0x00007ff8e4498000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ff8d71b0000 - 0x00007ff8d71ba000 	C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\jimage.dll
+0x00007ff8e2a80000 - 0x00007ff8e2cae000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ff8e7230000 - 0x00007ff8e75ba000 	C:\WINDOWS\System32\combase.dll
+0x00007ff8e6430000 - 0x00007ff8e6507000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ff8da7e0000 - 0x00007ff8da812000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ff8e5a70000 - 0x00007ff8e5aea000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ff8deee0000 - 0x00007ff8deeee000 	C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\instrument.dll
+0x00007ff8c9a10000 - 0x00007ff8c9a35000 	C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.2361_none_2712ced57382f843;C:\Users\WooHeeSeop\.jdks\corretto-17.0.9\bin\server
+
+VM Arguments:
+jvm_args: -XX:TieredStopAtLevel=1 -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -javaagent:C:\Users\WooHeeSeop\Desktop\programming\intellij\IntelliJ IDEA 2022.2.1\lib\idea_rt.jar=51326:C:\Users\WooHeeSeop\Desktop\programming\intellij\IntelliJ IDEA 2022.2.1\bin -Dfile.encoding=UTF-8 
+java_command: com.example.teamproject.TeamProJectApplication
+java_class_path (initial): C:\Users\WooHeeSeop\Desktop\gitClone\build\classes\java\main;C:\Users\WooHeeSeop\Desktop\gitClone\build\resources\main;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\org.projectlombok\lombok\1.18.22\9c08ea24c6eb714e2d6170e8122c069a0ba9aacf\lombok-1.18.22.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-thymeleaf\2.6.5\6cff5a773aeac16ee05e9471070eb916c496cff\spring-boot-starter-thymeleaf-2.6.5.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-web\2.6.5\2fe510ed31c08e65265451a407607fe53666df0a\spring-boot-starter-web-2.6.5.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-data-jpa\2.6.5\8021867a0f7369de293dd15f6141aff375f8f736\spring-boot-starter-data-jpa-2.6.5.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\mysql\mysql-connector-java\8.0.28\33678b1729d4f832b9e4bcb2d5bbd67940920a7a\mysql-connector-java-8.0.28.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\com.querydsl\querydsl-jpa\5.0.0\2d66608cb2cbcde56290e49f2918960cc17fcb09\querydsl-jpa-5.0.0.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\com.querydsl\querydsl-apt\5.0.0\fa5554c395bdcbe9846242824857a82874ad3223\querydsl-apt-5.0.0.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-security\2.6.5\561069b6005bc6853f04e69227f63b05dc2dbeb0\spring-boot-starter-security-2.6.5.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-oauth2-client\2.6.5\77eacf3334e4876f8273f1c40da14fba51fab3f7\spring-boot-starter-oauth2-client-2.6.5.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\io.jsonwebtoken\jjwt-api\0.11.5\f742940045619d06383e7df37b21ac422b476cf1\jjwt-api-0.11.5.jar;C:\Users\WooHeeSeop\.gradle\caches\modules-2\files-2.1\javax.xml.bind\jaxb-api\2.3.0\99f802e0cb3e953ba3d6e698795c4ae
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 264241152                                 {product} {ergonomic}
+     bool ManagementServer                         = true                                      {product} {command line}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4223664128                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 0                                      {pd product} {ergonomic}
+     bool ProfileInterpreter                       = false                                  {pd product} {command line}
+    uintx ProfiledCodeHeapSize                     = 0                                      {pd product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4223664128                             {manageable} {ergonomic}
+     intx TieredStopAtLevel                        = 1                                         {product} {command line}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_341
+CLASSPATH=C:\Program Files\Java\jdk1.8.0_341\lib
+PATH=C:\Program Files\Java\jdk1.8.0_341bin\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;c:\jdk1.8\bin;C:\Program Files (x86)\NAT Service;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\PuTTY\;C:\Program Files\PowerShell\7\;C:\Users\WooHeeSeop\AppData\Local\Microsoft\WindowsApps;C:\Users\우희섭\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\우희섭\AppData\Roaming\npm;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2.1\bin;;C:\Program Files\JetBrains\IntelliJ IDEA 2021.1.3\bin;;;C:\Program Files\JetBrains\PyCharm 2023.2.1\bin;;C:\Users\WooHeeSeop\.dotnet\tools
+USERNAME=WooHeeSeop
+LANG=KO
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+TMP=C:\Users\WOOHEE~1\AppData\Local\Temp
+TEMP=C:\Users\WOOHEE~1\AppData\Local\Temp
+
+
+
+Periodic native trim disabled
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22621 (10.0.22621.2428)
+OS uptime: 15 days 4:37 hours
+
+CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 140 stepping 1 microcode 0x8a, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, avx512f, avx512dq, avx512cd, avx512bw, avx512vl, sha, fma, vzeroupper, avx512_vpopcntdq, avx512_vpclmulqdq, avx512_vaes, avx512_vnni, clflush, clflushopt, clwb, avx512_vbmi2, avx512_vbmi
+Processor Information for processor 0
+  Max Mhz: 2803, Current Mhz: 2803, Mhz Limit: 2803
+Processor Information for processor 1
+  Max Mhz: 2803, Current Mhz: 2803, Mhz Limit: 2803
+Processor Information for processor 2
+  Max Mhz: 2803, Current Mhz: 2803, Mhz Limit: 2803
+Processor Information for processor 3
+  Max Mhz: 2803, Current Mhz: 2803, Mhz Limit: 2803
+Processor Information for processor 4
+  Max Mhz: 2803, Current Mhz: 1201, Mhz Limit: 2803
+Processor Information for processor 5
+  Max Mhz: 2803, Current Mhz: 2803, Mhz Limit: 2803
+Processor Information for processor 6
+  Max Mhz: 2803, Current Mhz: 2803, Mhz Limit: 2803
+Processor Information for processor 7
+  Max Mhz: 2803, Current Mhz: 1201, Mhz Limit: 2803
+
+Memory: 4k page, system-wide physical 16108M (1433M free)
+TotalPageFile size 45599M (AvailPageFile size 51M)
+current process WorkingSet (physical memory assigned to process): 11M, peak: 11M
+current process commit charge ("private bytes"): 55M, peak: 307M
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.9+8-LTS) for windows-amd64 JRE (17.0.9+8-LTS), built on Oct 12 2023 16:15:33 by "Administrator" with MS VC++ 16.10 / 16.11 (VS2019)
+
+END.

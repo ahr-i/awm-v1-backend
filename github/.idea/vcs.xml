@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <mapping directory="$PROJECT_DIR$/any-where-map" vcs="Git" />
+=======
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+>>>>>>> ec39bc92820df73215dd9b39b629f9db2cbb79f2
+=======
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+>>>>>>> ec39bc92820df73215dd9b39b629f9db2cbb79f2
+  </component>
+</project>

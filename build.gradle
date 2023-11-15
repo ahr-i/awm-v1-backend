@@ -1,0 +1,79 @@
+//buildscript {
+//    //Add
+//    ext {
+//        queryDslVersion = "5.0.0"
+//    }
+//}
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.6.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+//    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'mysql:mysql-connector-java'
+    implementation 'mysql:mysql-connector-java:8.0.28'
+    //QueryDsl의존성 주입
+//    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+//    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    // jjwt API 의존성 추가
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+
+    // jjwt 구현체(runtime) 의존성 추가
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+
+    // (선택적) jjwt와 Jackson 라이브러리를 사용하여 JSON 처리를 위한 의존성
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
+
+}
+
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}
+//
+//
+//def querydslDir = "$buildDir/generated/querydsl"
+//
+////querydsl 추가 시작
+//
+//querydsl {
+//    jpa = true
+//    querydslSourcesDir = querydslDir
+//}
+//sourceSets {
+//    main.java.srcDir querydslDir
+//}
+//compileQuerydsl{
+//    options.annotationProcessorPath = configurations.querydsl
+//}
+//configurations {
+//    compileOnly {
+//        extendsFrom annotationProcessor
+//    }
+//    querydsl.extendsFrom compileClasspath
+//}
+////querydsl 추가 끝
+//
+//
+

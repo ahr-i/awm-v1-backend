@@ -2,6 +2,7 @@ package com.example.teamproject.Service;
 
 import com.example.teamproject.Dto.CommuityDto.BoardDto;
 
+import com.example.teamproject.Dto.CommuityDto.PagePostDto;
 import com.example.teamproject.Dto.CommuityDto.updateUserDto;
 import com.example.teamproject.Dto.CommuityDto.Response;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
@@ -53,7 +54,8 @@ public class BoardService {
         List<CommentEntity> comment = commentRepository.findAllByEntityOrderByCreatTimeDesc(byId.get());
         if(byId.isPresent()) {
             Optional<updateUserDto> boardDto  = updateUserDto.OptionalBoardEntityToUpdateDto(byId);
-            Response response = new Response(boardDto.get(),comment);
+            Long commentCount = commentRepository.countAllByEntity(byId.get());
+            Response response = new Response(boardDto.get(),comment,commentCount);
             return response;
         }
         else return null;
@@ -66,7 +68,7 @@ public class BoardService {
             return false;
         }
     }
-    public Page<updateUserDto> page(int page, int locationId){
+    public Page<PagePostDto> page(int page, int locationId){
 
         List<BoardEntity> allBy = repository.findAllByLocation_LocationId(locationId);
 
@@ -74,17 +76,12 @@ public class BoardService {
 
         PageRequest createdDate = PageRequest.of(page, 3, Sort.by("createTime").descending());
         Page<BoardEntity> findPost = repository.findAllByLocation_LocationId(locationId, createdDate);
-        Page<updateUserDto> findBoardDto = updateUserDto.PageBoardEntityToUpdateUserDto(findPost);
-        return findBoardDto != null ? findBoardDto : null;
+
+        Page<PagePostDto> dtos = PagePostDto.PageBoardEntityToUpdateUserDto(findPost, commentRepository);
+        return dtos;
+
     }
-    public BoardEntity updateFindPostUser(int postId){
-        Optional<BoardEntity> byId = repository.findById(postId);
-        if(byId.isPresent()){
-            return byId.get();
-        }
-        return null;
-    }
-    public BoardEntity updatePost(int postId, updateUserDto dto){
+    public BoardEntity updatePost(updateUserDto dto){
         Optional<BoardEntity> byId = repository.findById(dto.getId());
 
         if(byId.isPresent()) {

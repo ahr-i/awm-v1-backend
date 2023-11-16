@@ -2,6 +2,7 @@ package com.example.teamproject.Controller.CommuityController;
 
 
 import com.example.teamproject.Dto.CommuityDto.BoardDto;
+import com.example.teamproject.Dto.CommuityDto.PagePostDto;
 import com.example.teamproject.Dto.CommuityDto.updateUserDto;
 import com.example.teamproject.Dto.CommuityDto.Response;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
@@ -71,7 +72,7 @@ public class BoardController {
     }
     @PostMapping("/user/update/{postId}")
     public ResponseEntity updateBoardDto(@PathVariable int postId,@RequestBody updateUserDto dto) {
-        BoardEntity entity = service.updatePost(postId, dto);
+        BoardEntity entity = service.updatePost(dto);
 
         if(entity != null) {
            return ResponseEntity.ok().body("글 수정이 완료 되었습니다.");
@@ -82,7 +83,7 @@ public class BoardController {
     //list/1?page=1
     @GetMapping("/board/paging/{locationId}")
     public ResponseEntity paging(@RequestParam(defaultValue = "0") int page,@PathVariable int locationId){
-        Page<updateUserDto> findPage = service.page(page, locationId);
+        Page<PagePostDto> findPage = service.page(page, locationId);
 
         if(findPage == null) {
             return ResponseEntity.notFound().build();

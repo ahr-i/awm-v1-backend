@@ -14,5 +14,5 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<CommentEntity,Integer> {
 
     List<CommentEntity> findAllByEntityOrderByCreatTimeDesc(BoardEntity entity);
-
+    Long countAllByEntity(BoardEntity entity);
 }

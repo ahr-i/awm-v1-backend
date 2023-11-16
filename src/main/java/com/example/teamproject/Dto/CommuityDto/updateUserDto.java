@@ -40,18 +40,7 @@ public class updateUserDto {
 
 
 
-    public static Page<updateUserDto> PageBoardEntityToUpdateUserDto(Page<BoardEntity> entities){
-       return entities.map(entity -> {
-            updateUserDto dto = new updateUserDto();
-            dto.setBoardWriter(entity.getBoardWriter());
-            dto.setBoardTitle(entity.getBoardTitle());
-            dto.setBoardContent(entity.getBoardContent());
-            dto.setBoardHits(entity.getBoardHits());
-            dto.setUserId(entity.getUserId());
-            dto.setBoardCreatedTime(entity.getCreateTime());
-            return dto;
-        });
-    }
+
 
     public  static updateUserDto TransferBoardEntityToFindBoardDto(BoardEntity entity){
         updateUserDto dto = new updateUserDto();

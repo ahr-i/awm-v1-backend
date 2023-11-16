@@ -14,9 +14,13 @@ public class Response {
 
     updateUserDto boardDto;
     List<CommentEntity> entityList;
-    public Response(updateUserDto boardDto, List<CommentEntity> entityList) {
+    Long commentCount;
+    public Response(updateUserDto boardDto, List<CommentEntity> entityList,Long commentCount) {
         this.boardDto = boardDto;
         this.entityList = entityList;
+        if(commentCount != null) this.commentCount = commentCount;
+        else this.commentCount = Long.valueOf(0);
+
     }
 
 

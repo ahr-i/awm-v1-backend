@@ -1,5 +1,6 @@
 package com.example.teamproject.JWT;
 
+import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -7,6 +8,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -34,6 +36,15 @@ public class JWTUtil {
         return Jwts.builder().setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + (60000 * 30)))
                 .signWith(key).compact();
-
+    }
+    public static String createOauthJwt(PrincipalDetails user){
+        long expireTime = 60000 * 30;
+        Claims claims = Jwts.claims();
+        claims.put("username",user.getEntity().getProviderUserId());
+        claims.put("provider",user.getEntity().getProvider());
+       return Jwts.builder()
+               .setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
+               .setExpiration(new Date(System.currentTimeMillis() + expireTime ))
+               .signWith(key).compact();
     }
 }

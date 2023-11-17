@@ -2,8 +2,10 @@ package com.example.teamproject.Service.SpringSecurityLogin;
 
 import com.example.teamproject.Dto.UserDto;
 //import com.example.teamproject.Repository.JPARePository;
+import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
 import com.example.teamproject.JpaClass.UserTable.User;
 import com.example.teamproject.Repository.JpaRepository.UserRepository;
+import com.example.teamproject.Repository.Oauth2Repository.Oauth2Repository;
 import com.example.teamproject.prvoider.Oauth2UserInfo;
 import com.example.teamproject.prvoider.googleOauthUser;
 import com.example.teamproject.prvoider.naverOauthUser;
@@ -16,6 +18,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,35 +32,33 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
      */
 
     private final UserRepository repository;
+    private final Oauth2Repository oauth2Repository;
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
         Oauth2UserInfo userInfo = null;
-
+        Oauth2UserEntity entity = null;
 
         if(userRequest.getClientRegistration().getRegistrationId().equals("google")){
             log.info("구글 로그인 요청");
 
          userInfo = new googleOauthUser(oAuth2User.getAttributes());
-//            User byUserId = repository.findByUserId(userInfo.getProviderId());
-//
-//            if(byUserId == null){
-                User transfer = new UserDto().oauthTransfer(userInfo);
-//                repository.save(transfer);
-//
+            Optional<Oauth2UserEntity> provider = oauth2Repository.findByProviderUserId(userInfo.getProviderId());
+            entity = Oauth2UserEntity.saveTransferOauth2User(userInfo);
+            if(!provider.isPresent()) oauth2Repository.save(entity);
 
         }
 
         else if(userRequest.getClientRegistration().getRegistrationId().equals("naver")){
             log.info("네이버 로그인 요청");
+
             userInfo = new naverOauthUser((Map)oAuth2User.getAttributes().get("response"));
-//            User byUserId = repository.findByUserId(userInfo.getProviderId());
-//
-//            if(byUserId == null){
-//                User transfer = new UserDto().oauthTransfer(userInfo);
-//                repository.save(transfer);
-//            }
+            Optional<Oauth2UserEntity> oauth2User = oauth2Repository.findByProviderUserId(userInfo.getProviderId());
+            entity = Oauth2UserEntity.saveTransferOauth2User(userInfo);
+            if(!oauth2User.isPresent()) oauth2Repository.save(entity);
+
+
         }
-        return new PrincipalDetails(oAuth2User.getAttributes(),new UserDto().oauthTransfer(userInfo));
+        return new PrincipalDetails(oAuth2User.getAttributes(),entity);
     }
 }

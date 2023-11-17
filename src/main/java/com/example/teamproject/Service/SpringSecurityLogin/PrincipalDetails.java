@@ -1,4 +1,5 @@
 package com.example.teamproject.Service.SpringSecurityLogin;
+import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
 import com.example.teamproject.JpaClass.UserTable.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +19,7 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
 
     private User userInfo;
     private User details;
+    private Oauth2UserEntity entity;
 
 
    //일반 유저 (Oauth 사용자 X)
@@ -26,9 +28,12 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
         this.userInfo = info;
     }
         //Oauth 유저 사용자
-    public PrincipalDetails(Map<String, Object> attribute, User details) {
+    public PrincipalDetails(Map<String, Object> attribute, Oauth2UserEntity entity) {
         this.attribute = attribute;
-        this.details = details;
+        this.entity = entity;
+    }
+    public PrincipalDetails(Oauth2UserEntity entity) {
+        this.entity = entity;
     }
 
 
@@ -53,8 +58,8 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
     public String getUsername() {
         if(userInfo != null){
             return userInfo.getUserId();
-        }else if(details != null) {
-            return details.getUserId();
+        }else if(entity != null) {
+            return entity.getProviderUserId();
         }else return null;
 
     }

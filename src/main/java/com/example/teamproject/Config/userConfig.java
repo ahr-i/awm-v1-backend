@@ -14,7 +14,6 @@ import javax.persistence.EntityManager;
 @Configuration
 @RequiredArgsConstructor
 public class userConfig implements WebMvcConfigurer {
-    private final EntityManager manager;
 
 
 

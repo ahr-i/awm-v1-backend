@@ -19,18 +19,11 @@ public class naverOauthUser implements Oauth2UserInfo {
     }
     @Override
     public String getProviderId() {
-        log.info("프로바이더 아이디 : {}",attribute.get("id"));
-        return (String)attribute.get("id");
+        return (String)attribute.get("email");
     }
 
     @Override
     public String getProvider() {
         return "naver";
     }
-
-    @Override
-    public String getEmail() {
-        return (String)attribute.get("email");
-    }
-
 }

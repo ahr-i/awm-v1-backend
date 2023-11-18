@@ -1,22 +1,20 @@
 package com.example.teamproject.Filter;
 
 
+import com.example.teamproject.Dto.UserDto;
 import com.example.teamproject.JWT.JWTUtil;
 import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
-import com.example.teamproject.JpaClass.UserTable.User;
+import com.example.teamproject.JpaClass.UserTable.UserEntity;
 import com.example.teamproject.Repository.JpaRepository.UserRepository;
 import com.example.teamproject.Repository.Oauth2Repository.Oauth2Repository;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.SignatureException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -24,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  시큐리티가 filter를 가지고 있는데 BasicAuthenticationFilter 라는 것이 있음.
@@ -70,13 +69,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
             String token = authorization.split(" ")[1];
             Claims userName = JWTUtil.getUserName(token);
-            String provider = userName.get("provider", String.class);
+            String provider = userName.get("provider",String.class);
             if (userName != null) {
 
                 if(provider.equals("google") || provider.equals("naver")){
                     String oauth2UserProviderId = userName.get("username",String.class);
                     Oauth2UserEntity entity = oauth2Repository.findByProviderUserId(oauth2UserProviderId).get();
-                    PrincipalDetails details = new PrincipalDetails(entity);
+                    UserDto dto = UserDto.oauthTransferEntity(entity);
+                    PrincipalDetails details = new PrincipalDetails(dto);
                     Authentication authentication = new UsernamePasswordAuthenticationToken(details,null,details.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     chain.doFilter(request,response);
@@ -84,11 +84,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                 else {
 
                     String userId = userName.get("username", String.class);
-                    User byUserId = repository.findByUserId(userId);
+                    Optional<UserEntity> byUserId = repository.findByUserId(userId);
 
-                    PrincipalDetails details = new PrincipalDetails(byUserId);
+                    UserDto dto = UserDto.UserEntityToUserDto(byUserId.get());
+
+                    PrincipalDetails details = new PrincipalDetails(dto);
                     Authentication authentication = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
-
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     chain.doFilter(request, response);
                 }

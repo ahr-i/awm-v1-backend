@@ -15,7 +15,7 @@ public class googleOauthUser implements Oauth2UserInfo {
 
     @Override
     public String getProviderId() {
-        return (String)attribute.get("sub");
+        return (String)attribute.get("email");
     }
 
     @Override
@@ -23,9 +23,5 @@ public class googleOauthUser implements Oauth2UserInfo {
         return "google";
     }
 
-    @Override
-    public String getEmail() {
-        return (String)attribute.get("email");
-    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.teamproject.Config;
 import com.example.teamproject.Dto.OauthDto;
+import com.example.teamproject.Dto.UserDto;
 import com.example.teamproject.Filter.JWTAuthorizationFilter;
 import com.example.teamproject.Filter.JwtAuthentication;
 import com.example.teamproject.JWT.JWTUtil;
@@ -94,9 +95,9 @@ public class SecurityConfig {
                 PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
                 String jwtToken = JWTUtil.createOauthJwt(principal);
                 ObjectMapper mapper = new ObjectMapper();
-                OauthDto dto = OauthDto.Oauth2UserEntityToDto(principal.getEntity());
+                UserDto userDto = principal.getUserInfo();
                 log.info("토큰 정보 : {}",jwtToken);
-                String oauthUserInfo = mapper.writeValueAsString(dto);
+                String oauthUserInfo = mapper.writeValueAsString(userDto);
                 response.setContentType("application/json");
                 response.addHeader("Authorization","Bearer "+ jwtToken);
                 response.setStatus(HttpServletResponse.SC_OK);

@@ -1,7 +1,7 @@
 package com.example.teamproject.Filter;
 
+import com.example.teamproject.Dto.UserDto;
 import com.example.teamproject.JWT.JWTUtil;
-import com.example.teamproject.JpaClass.UserTable.User;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ public class JwtAuthentication extends UsernamePasswordAuthenticationFilter {
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            User user = objectMapper.readValue(request.getInputStream(), User.class);
+            UserDto user = objectMapper.readValue(request.getInputStream(), UserDto.class);
             //인증 과정아 사용되는 클래스 -> 아이디랑 비밀번호랑 담아서 시큐리티한테 인증 요청 보냄
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUserId()
                     ,user.getPassword(), List.of(new SimpleGrantedAuthority("USER")));
@@ -61,7 +61,7 @@ public class JwtAuthentication extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         PrincipalDetails principal = (PrincipalDetails) authResult.getPrincipal();
 
-        String jwtToken = JWTUtil.createJwt(principal.getUsername());
+        String jwtToken = JWTUtil.createJwt(principal.getUserInfo());
         log.info("토큰 정보 : ",jwtToken);
         response.addHeader("Authorization","Bearer "+jwtToken);
     }

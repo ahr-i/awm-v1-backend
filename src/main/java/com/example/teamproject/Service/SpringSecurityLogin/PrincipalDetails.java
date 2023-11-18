@@ -1,12 +1,11 @@
 package com.example.teamproject.Service.SpringSecurityLogin;
+import com.example.teamproject.Dto.UserDto;
 import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
-import com.example.teamproject.JpaClass.UserTable.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -17,23 +16,19 @@ import java.util.Map;
 @Data
 public class PrincipalDetails implements UserDetails , OAuth2User {
 
-    private User userInfo;
-    private User details;
-    private Oauth2UserEntity entity;
+    private UserDto userInfo;
+
 
 
    //일반 유저 (Oauth 사용자 X)
     private Map<String,Object> attribute;
-    public PrincipalDetails(User info) {
-        this.userInfo = info;
+    public PrincipalDetails(UserDto userInfo) {
+        this.userInfo = userInfo;
     }
         //Oauth 유저 사용자
-    public PrincipalDetails(Map<String, Object> attribute, Oauth2UserEntity entity) {
+    public PrincipalDetails(Map<String, Object> attribute,UserDto dto) {
         this.attribute = attribute;
-        this.entity = entity;
-    }
-    public PrincipalDetails(Oauth2UserEntity entity) {
-        this.entity = entity;
+        this.userInfo = dto;
     }
 
 
@@ -56,12 +51,7 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
 
     @Override
     public String getUsername() {
-        if(userInfo != null){
-            return userInfo.getUserId();
-        }else if(entity != null) {
-            return entity.getProviderUserId();
-        }else return null;
-
+        return userInfo.getUserId();
     }
 
     @Override

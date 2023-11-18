@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @ToString
-public class User {
+@Table(name = "user_table")
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
@@ -29,28 +30,11 @@ public class User {
     @Column
     private String phoneNumber;
     @Column
-    private String email;
-    @Column
     private int  state;
     @Column
     private String password;
     @Column
     @CreationTimestamp
     private LocalDateTime creatAt;
-    @Builder
-    public User(String userId, String nickName, int rankScore, String image,
-                String phoneNumber, String email, int state, String password) {
-        this.userId = userId;
-        this.nickName = nickName;
-        this.rankScore = rankScore;
-        this.image = image;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.state = state;
-        this.password = password;
-    }
-
-
-
-
+    private String provider;
 }

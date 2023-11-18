@@ -1,5 +1,6 @@
 package com.example.teamproject.JWT;
 
+import com.example.teamproject.Dto.UserDto;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -30,9 +31,12 @@ public class JWTUtil {
         }
     }
 
-    public static String createJwt(String userId){
+    public static String createJwt(UserDto dto){
         Claims claims = Jwts.claims();
-        claims.put("username",userId);
+        claims.put("username",dto.getUserId());
+        claims.put("provider",dto.getProvider());
+        claims.put("nickName",dto.getNickName());
+        claims.put("rankScore",dto.getRankScore());
         return Jwts.builder().setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + (60000 * 30)))
                 .signWith(key).compact();
@@ -40,8 +44,10 @@ public class JWTUtil {
     public static String createOauthJwt(PrincipalDetails user){
         long expireTime = 60000 * 30;
         Claims claims = Jwts.claims();
-        claims.put("username",user.getEntity().getProviderUserId());
-        claims.put("provider",user.getEntity().getProvider());
+        claims.put("username",user.getUserInfo().getUserId());
+        claims.put("provider",user.getUserInfo().getProvider());
+        claims.put("nickName",user.getUserInfo().getNickName());
+        claims.put("rankScore",user.getUserInfo().getRankScore());
        return Jwts.builder()
                .setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
                .setExpiration(new Date(System.currentTimeMillis() + expireTime ))

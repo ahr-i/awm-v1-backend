@@ -12,14 +12,5 @@ public class OauthDto {
     private String image;
     private String email;
 
-    public static OauthDto Oauth2UserEntityToDto(Oauth2UserEntity entity){
-        OauthDto dto = new OauthDto();
-        dto.setId(entity.getId());
-        dto.setScore(entity.getScore());
-        dto.setEmail(entity.getEmail());
-        dto.setNickName(entity.getNickname());
-        dto.setImage(entity.getImage());
-        return dto;
-    }
 }
 

@@ -1,11 +1,13 @@
 package com.example.teamproject.Repository.JpaRepository;
 
-import com.example.teamproject.JpaClass.UserTable.User;
+import com.example.teamproject.JpaClass.UserTable.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User,Integer> {
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 
 
-    public User findByUserId(String userId);
+    public Optional<UserEntity> findByUserId(String userId);
 
 }

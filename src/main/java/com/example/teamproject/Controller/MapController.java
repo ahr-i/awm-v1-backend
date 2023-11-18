@@ -28,7 +28,8 @@ public class MapController {
     @GetMapping("/user/t1")
     public String user(Authentication authentication){
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-        log.info(principal.getEntity().getProviderUserId());
+        log.info(principal.getUserInfo().getUserId());
+        log.info("오어스 정보 {} " +principal.getUserInfo());
         return "userTeST";
     }
 

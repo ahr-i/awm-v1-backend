@@ -14,10 +14,10 @@ import java.util.List;
 @Transactional
 public interface BoardRepository extends JpaRepository<BoardEntity,Integer> {
     @Modifying
-    @Query(value = "update BoardEntity b set b.boardHits = b.boardHits +1 where b.id =:postId")
-    void updateHit(@Param("postId") int id);
-    void removeById(int id);
-    Page<BoardEntity> findAllByLocation_LocationId(int id, Pageable pageable);
+    @Query(value = "update BoardEntity b set b.boardHits = b.boardHits +1 where b.postId =:postId")
+    void updateHit(@Param("postId") int postId);
+    void removeByPostId(int postId);
+    Page<BoardEntity> findAllByLocation_LocationId(int postId, Pageable pageable);
 
     List<BoardEntity> findAllByLocation_LocationId(int locationId);
 }

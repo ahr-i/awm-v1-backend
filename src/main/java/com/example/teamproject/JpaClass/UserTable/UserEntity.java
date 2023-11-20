@@ -24,7 +24,7 @@ public class UserEntity {
     @Column
     private int rankScore;
     @Lob
-    private String image;
+    private byte[] image;
     @Column
     private String imageHash;
     @Column

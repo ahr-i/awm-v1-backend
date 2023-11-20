@@ -1,9 +1,6 @@
 package com.example.teamproject.Dto;
-
-
 import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
 import com.example.teamproject.JpaClass.UserTable.UserEntity;
-import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import lombok.Data;
 
 @Data
@@ -11,7 +8,7 @@ public class UserDto {
 
     private String nickName;
     private int rankScore;
-    private String image;
+    private byte[] image;
     private String image_hash;
     private int state;
     private String provider;
@@ -31,12 +28,13 @@ public class UserDto {
     }
     public static UserDto UserEntityToUserDto(UserEntity entity){
         UserDto dto = new UserDto();
+        dto.setNickName(entity.getNickName());
         dto.setUserId(entity.getUserId());
         dto.setPassword(entity.getPassword());
         dto.setProvider(entity.getProvider());
         dto.setRankScore(entity.getRankScore());
-        dto.setImage(entity.getImage());
         dto.setState(0);
+        dto.setImage(entity.getImage());
         dto.setImage_hash(dto.getImage_hash());
         dto.setNickName(dto.nickName);
         return dto;
@@ -58,6 +56,4 @@ public class UserDto {
         users.setProvider("AppUser");
         return users;
     }
-
-
 }

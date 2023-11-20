@@ -43,7 +43,10 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             log.info("구글 로그인 요청");
          userInfo = new googleOauthUser(oAuth2User.getAttributes());
             oauth2User = oauth2Repository.findByProviderUserId(userInfo.getProviderId());
-            if(!oauth2User.isPresent()) oauth2Repository.save(entity);
+            if(!oauth2User.isPresent()) {
+                entity = Oauth2UserEntity.saveTransferOauth2User(userInfo);
+                oauth2Repository.save(entity);
+            }
 
             Optional<Oauth2UserEntity> oauthUser = oauth2Repository.findByProviderUserId(userInfo.getProviderId());
              dto = UserDto.oauthTransferEntity(oauthUser.get());
@@ -53,7 +56,10 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             log.info("네이버 로그인 요청");
             userInfo = new naverOauthUser((Map)oAuth2User.getAttributes().get("response"));
              oauth2User = oauth2Repository.findByProviderUserId(userInfo.getProviderId());
-            if(!oauth2User.isPresent()) oauth2Repository.save(entity);
+            if(!oauth2User.isPresent()) {
+                entity = Oauth2UserEntity.saveTransferOauth2User(userInfo);
+                oauth2Repository.save(entity);
+            }
 
             Optional<Oauth2UserEntity> oauthUser = oauth2Repository.findByProviderUserId(userInfo.getProviderId());
              dto = UserDto.oauthTransferEntity(oauthUser.get());

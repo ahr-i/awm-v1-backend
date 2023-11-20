@@ -1,5 +1,6 @@
 package com.example.teamproject.Dto.CommuityDto;
 
+import com.example.teamproject.Dto.CommuityDto.BoardDto.BoardDto;
 import com.example.teamproject.JpaClass.CommunityTable.CommentEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -12,16 +13,14 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
 
-    updateUserDto boardDto;
+    BoardDto boardDto;
     List<CommentEntity> entityList;
     Long commentCount;
-    public Response(updateUserDto boardDto, List<CommentEntity> entityList,Long commentCount) {
-        this.boardDto = boardDto;
+    public Response(BoardDto dto, List<CommentEntity> entityList, Long commentCount) {
+        this.boardDto = dto;
         this.entityList = entityList;
         if(commentCount != null) this.commentCount = commentCount;
         else this.commentCount = Long.valueOf(0);
 
     }
-
-
 }

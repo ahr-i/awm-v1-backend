@@ -1,9 +1,8 @@
 package com.example.teamproject.Controller.CommuityController;
 
 
-import com.example.teamproject.Dto.CommuityDto.BoardDto;
-import com.example.teamproject.Dto.CommuityDto.PagePostDto;
-import com.example.teamproject.Dto.CommuityDto.updateUserDto;
+
+import com.example.teamproject.Dto.CommuityDto.BoardDto.BoardDto;
 import com.example.teamproject.Dto.CommuityDto.Response;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
 import com.example.teamproject.Service.BoardService;
@@ -15,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -30,11 +31,11 @@ public class BoardController {
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
         Boolean aBoolean = service.BoardSave(dto,locationId,principal.getUserInfo().getUserId());
         if(aBoolean) {
-
             return ResponseEntity.ok().build();
         }
         else return ResponseEntity.badRequest().build();
     }
+
     //글 상세조회
     @GetMapping("/board/findBoard/{postId}")
     @ResponseBody
@@ -57,33 +58,36 @@ public class BoardController {
     @GetMapping("/user/update/{postId}")
     public ResponseEntity updateBoard(@PathVariable int postId,Authentication authentication){
 
-        if(authentication == null || authentication.getPrincipal() == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증되지 않은 사용자");
-        }
         BoardEntity boardUser = service.updateFindByPost(postId);
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 
         if(principal.getUserInfo().getUserId().equals(boardUser.getUserId())) {
-            updateUserDto dto = updateUserDto.TransferBoardEntityToFindBoardDto(boardUser);
+            BoardDto dto = BoardDto.DetailToBoardDto(boardUser);
             return ResponseEntity.ok().body(dto);
 
         }else if(boardUser == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
     @PostMapping("/user/update/{postId}")
-    public ResponseEntity updateBoardDto(@PathVariable int postId,@RequestBody updateUserDto dto) {
-        BoardEntity entity = service.updatePost(dto);
+    public ResponseEntity updateBoardDto(@PathVariable int postId,@RequestBody BoardDto dto) {
 
-        if(entity != null) {
-           return ResponseEntity.ok().body("글 수정이 완료 되었습니다.");
-        }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("글 수정이 완료되지 않았습니다.");
+        try {
+            BoardEntity entity = service.updatePost(dto);
+
+            if(entity != null) {
+                return ResponseEntity.ok().body("글 수정이 완료 되었습니다.");
+            }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("글 수정이 완료되지 않았습니다.");
+        }catch (IOException e){
+            log.info("파일 용량 초과");
+        }
+       return null;
     }
 
 
     //list/1?page=1
     @GetMapping("/board/paging/{locationId}")
     public ResponseEntity paging(@RequestParam(defaultValue = "0") int page,@PathVariable int locationId){
-        Page<PagePostDto> findPage = service.page(page, locationId);
+        Page<BoardDto> findPage = service.page(page, locationId);
 
         if(findPage == null) {
             return ResponseEntity.notFound().build();

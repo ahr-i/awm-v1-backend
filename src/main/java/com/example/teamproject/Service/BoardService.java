@@ -1,9 +1,5 @@
 package com.example.teamproject.Service;
-
-import com.example.teamproject.Dto.CommuityDto.BoardDto;
-
-import com.example.teamproject.Dto.CommuityDto.PagePostDto;
-import com.example.teamproject.Dto.CommuityDto.updateUserDto;
+import com.example.teamproject.Dto.CommuityDto.BoardDto.BoardDto;
 import com.example.teamproject.Dto.CommuityDto.Response;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
 import com.example.teamproject.JpaClass.CommunityTable.CommentEntity;
@@ -19,8 +15,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -29,46 +27,51 @@ public class BoardService {
     private final CommentRepository commentRepository;
     private final BoardRepository repository;
     private final LocationRepository locationRepository;
-    public Boolean BoardSave(BoardDto dto,int locationId,String userId){
+    public Boolean BoardSave(BoardDto dto, int locationId, String userId){
         try {
-            Optional<Location> byId = locationRepository.findById(locationId);
+            /*
+            첨부 파일 없을 때
+             */
+            Optional<Location> locationEntity = locationRepository.findById(locationId);
+            BoardEntity boardEntity = BoardDto.SaveToBoardEntity(dto, locationEntity, userId);
+            repository.save(boardEntity);
 
-            if(byId.isPresent()) {
-                repository.save(BoardEntity.Dto_To_Entity(dto,byId,userId));
-                return true;
-            }
-
-        }catch (Exception e){
-            log.info("멤버 포스트 저장 오류 : {}",e.getMessage());
-            e.printStackTrace();
+        }catch (IOException e){
+            log.info("IO 예외 {}",e.getMessage());
             return false;
         }
-        return null;
+        return true;
     }
     @Transactional
     public void updateHit(int postId){
         repository.updateHit(postId);
     }
+
+    /**
+     * 글 상세보기를 할때는 ReadToDto를 사용할 것.
+     * @param postId
+     * @return
+     */
     public Response findByPostAndContent(int postId){
-        Optional<BoardEntity> byId = repository.findById(postId);
-        List<CommentEntity> comment = commentRepository.findAllByEntityOrderByCreatTimeDesc(byId.get());
-        if(byId.isPresent()) {
-            Optional<updateUserDto> boardDto  = updateUserDto.OptionalBoardEntityToUpdateDto(byId);
-            Long commentCount = commentRepository.countAllByEntity(byId.get());
-            Response response = new Response(boardDto.get(),comment,commentCount);
+        Optional<BoardEntity> boardEntity = repository.findById(postId);
+        List<CommentEntity> comment = commentRepository.findAllByEntityOrderByCreatTimeDesc(boardEntity.get());
+        if(boardEntity.isPresent()) {
+            BoardDto dto = BoardDto.DetailToBoardDto(boardEntity.get());
+            Long commentCount = commentRepository.countAllByEntity(boardEntity.get());
+            Response response = new Response(dto,comment,commentCount);
             return response;
         }
         else return null;
     }
     public boolean removePost(int postId){
         try {
-            repository.removeById(postId);
+            repository.removeByPostId(postId);
             return true;
         }catch (Exception e) {
             return false;
         }
     }
-    public Page<PagePostDto> page(int page, int locationId){
+    public Page<BoardDto> page(int page, int locationId){
 
         List<BoardEntity> allBy = repository.findAllByLocation_LocationId(locationId);
 
@@ -77,22 +80,20 @@ public class BoardService {
         PageRequest createdDate = PageRequest.of(page, 3, Sort.by("createTime").descending());
         Page<BoardEntity> findPost = repository.findAllByLocation_LocationId(locationId, createdDate);
 
-        Page<PagePostDto> dtos = PagePostDto.PageBoardEntityToUpdateUserDto(findPost, commentRepository);
-        return dtos;
+        Page<BoardDto> sendPostdto = BoardDto.PageToBoardPostDto(findPost, commentRepository);
+        return sendPostdto;
 
     }
-    public BoardEntity updatePost(updateUserDto dto){
-        Optional<BoardEntity> byId = repository.findById(dto.getId());
+    public BoardEntity updatePost(BoardDto dto) throws IOException {
+        Optional<BoardEntity> byId = repository.findById(dto.getPostId());
 
-        if(byId.isPresent()) {
+        if (byId.isPresent()) {
             BoardEntity entity = byId.get();
-
-            entity.setBoardContent(dto.getBoardContent());
-            entity.setBoardTitle(dto.getBoardTitle());
-
-            repository.save(entity);
+            BoardEntity saveentity = BoardDto.updatePost(dto, byId.get());
+            repository.save(saveentity);
+            return byId.get();
         }
-            return null;
+        return null;
     }
 
     public BoardEntity updateFindByPost(int postId){

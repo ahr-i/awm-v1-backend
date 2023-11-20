@@ -1,4 +1,4 @@
-package com.example.teamproject.Dto.CommuityDto;
+package com.example.teamproject.Dto.CommuityDto.BoardDto;
 
 
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;

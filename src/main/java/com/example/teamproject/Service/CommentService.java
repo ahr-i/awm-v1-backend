@@ -1,7 +1,7 @@
 package com.example.teamproject.Service;
 
 
-import com.example.teamproject.Dto.CommuityDto.CommentDto;
+import com.example.teamproject.Dto.CommuityDto.BoardDto.CommentDto;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
 import com.example.teamproject.JpaClass.CommunityTable.CommentEntity;
 import com.example.teamproject.Repository.CommuityRepository.BoardRepository;
@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,10 +20,10 @@ public class CommentService {
     private final CommentRepository repository;
     private final BoardRepository boardRepository;
 
-    public Boolean save(CommentDto dto){
+    public Boolean save(CommentDto dto,int postId){
 
       try {
-          Optional<BoardEntity> byId = boardRepository.findById(dto.getPostId());
+          Optional<BoardEntity> byId = boardRepository.findById(postId);
           if(byId.isPresent()) {
               CommentEntity entity = CommentDto.TransferCommentEntity(dto,byId.get());
               repository.save(entity);

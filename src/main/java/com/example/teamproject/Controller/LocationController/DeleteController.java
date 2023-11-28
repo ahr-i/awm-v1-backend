@@ -1,6 +1,8 @@
 package com.example.teamproject.Controller.LocationController;
 
+import com.example.teamproject.Dto.LocationDto.DeleteDto;
 import com.example.teamproject.Dto.LocationDto.RegisterDto;
+import com.example.teamproject.Service.LocationService.DeleteService;
 import com.example.teamproject.Service.LocationService.RegisterService;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
@@ -16,18 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Slf4j
 @RestController
-public class RegisterController {
-    private final RegisterService service;
+public class DeleteController {
+    private final DeleteService service;
 
-    @PostMapping("/register")
-    public ResponseEntity registerLocation(@RequestBody RegisterDto dto, Authentication authentication){
-        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
-        Boolean result = service.register(dto, principalDetails.getUserInfo().getUserId());
+    @PostMapping("/delete")
+    public ResponseEntity deleteLocation(@RequestBody DeleteDto dto){
+        Boolean result = service.delete(dto);
 
-        if(result) {
-            return ResponseEntity.ok().body("장소 등록에 성공했습니다.");
+        if(true) {
+            return ResponseEntity.ok().body("장소 삭제에 성공했습니다.");
         } else {
-            return ResponseEntity.badRequest().body("장소 등록에 실패했습니다.");
+            return ResponseEntity.badRequest().body("장소 삭제에 실패했습니다.");
         }
     }
 }

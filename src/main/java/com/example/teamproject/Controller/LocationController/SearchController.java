@@ -1,14 +1,18 @@
 package com.example.teamproject.Controller.LocationController;
 
+import com.example.teamproject.Dto.LocationDto.InformationDto;
+import com.example.teamproject.Dto.LocationDto.LocationDto;
+import com.example.teamproject.Dto.LocationDto.SearchDto;
+import com.example.teamproject.Dto.LocationDto.SearchInformationDto;
 import com.example.teamproject.JpaClass.LocationTable.Location;
 import com.example.teamproject.Service.LocationService.SearchService;
+import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,16 +23,36 @@ import java.util.List;
 public class SearchController {
     private final SearchService service;
 
-    @GetMapping("/nearby")
-    public ResponseEntity registerLocation(@RequestParam double latitude,
-                                           @RequestParam double longitude,
-                                           @RequestParam double range){
-        List<Location> result = service.findNearBy(latitude, longitude, range);
+    @GetMapping("/in-range")
+    public ResponseEntity searchInRangeLocation(@ModelAttribute SearchDto dto) {
+        List<LocationDto> response = service.findInRange(dto);
 
-        if(result != null) {
-            return ResponseEntity.ok().body(result);
+        if(response != null) {
+            return ResponseEntity.ok().body(response);
         } else {
-            return ResponseEntity.badRequest().body("검색된 장소가 없습니다.");
+            return ResponseEntity.badRequest().body("in-range에 문제가 발생했습니다.");
+        }
+    }
+
+    @GetMapping("/within-range")
+    public ResponseEntity searchWithinRangeLocation(@ModelAttribute SearchDto dto) {
+        List<LocationDto> response = service.findWithinRange(dto);
+
+        if(response != null) {
+            return ResponseEntity.ok().body(response);
+        } else {
+            return ResponseEntity.badRequest().body("within-range에 문제가 발생했습니다.");
+        }
+    }
+
+    @GetMapping("/information")
+    public ResponseEntity searchLocationInformation(@ModelAttribute SearchInformationDto dto) {
+        InformationDto response = service.findLocationInformation(dto);
+
+        if(response != null) {
+            return ResponseEntity.ok().body(response);
+        } else {
+            return ResponseEntity.badRequest().body("찾을 수 없는 장소입니다.");
         }
     }
 }

@@ -56,6 +56,8 @@ public class SearchService {
             int locationId = getLocationId(dto.getLatitude(), dto.getLongitude(), dto.getCategory());
             Optional<Location> result = repository.findById(locationId);
 
+            repository.upVisitCount(locationId);
+
             return InformationDto.locationToInformationDto(result.get());
         } catch (Exception e){
             log.info(e.getMessage());

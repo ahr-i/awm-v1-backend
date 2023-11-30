@@ -1,12 +1,14 @@
 package com.example.teamproject.Dto.ChatDto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChatMessage {
     private String roomId; // 채팅방 ID
     private String nickName; // 발신자 닉네임

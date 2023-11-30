@@ -4,6 +4,7 @@ import com.example.teamproject.Dto.ChatDto.ChatRoom;
 import com.example.teamproject.Service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,14 @@ import java.util.List;
 @RequestMapping("/chat")
 public class ChatRoomController {
     private final ChatService chatService;
+
+    // 채팅 리스트
+    @GetMapping("/room")
+    @ResponseBody
+    public ResponseEntity rooms(Model model){
+        log.info("채팅 리스트");
+        return ResponseEntity.ok().body("채팅 리스트 화면");
+    }
 
     // 모든 채팅방 목록
     @GetMapping("/rooms")
@@ -33,9 +42,10 @@ public class ChatRoomController {
 
     // 채팅방 입장
     @GetMapping("/room/enter/{roomId}")
-    public String roomDetail(Model model, @PathVariable String roomId){
+    @ResponseBody
+    public ResponseEntity roomDetail(Model model, @PathVariable String roomId){
         model.addAttribute("roomId", roomId);
-        return "/chat/roomdetail";
+        return ResponseEntity.ok().body("채팅방 입장");
     }
 
     //특정 채팅방 조회

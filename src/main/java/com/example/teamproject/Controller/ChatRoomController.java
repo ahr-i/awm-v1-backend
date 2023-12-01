@@ -43,13 +43,25 @@ public class ChatRoomController {
     // 채팅방 입장
     @GetMapping("/room/enter/{roomId}")
     @ResponseBody
-    public ResponseEntity roomDetail(Model model, @PathVariable String roomId){
+    public ResponseEntity<?> roomDetail(Model model, @PathVariable String roomId) {
+        ChatRoom findChatRoom = chatService.findRoomById(roomId);
+
+        if (findChatRoom == null) {
+            return ResponseEntity.badRequest().body("채팅방이 존재하지 않음");
+        }
+
         model.addAttribute("roomId", roomId);
         return ResponseEntity.ok().body("채팅방 입장");
     }
 
+
     //특정 채팅방 조회
     @GetMapping("/room/{roomId}")
     @ResponseBody
-    public ChatRoom roomInfo(@PathVariable String roomId){return chatService.findRoomById(roomId);}
+    public ResponseEntity roomInfo(@PathVariable String roomId){
+        ChatRoom findChatRoom = chatService.findRoomById(roomId);
+        if(findChatRoom == null)
+            return ResponseEntity.badRequest().body("해당 채팅방을 찾을수 없음");
+        return ResponseEntity.ok(findChatRoom);
+    }
 }

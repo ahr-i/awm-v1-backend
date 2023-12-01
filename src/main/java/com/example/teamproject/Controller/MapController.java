@@ -1,5 +1,7 @@
 package com.example.teamproject.Controller;
 
+import com.example.teamproject.Filter.JwtAuthentication;
+import com.example.teamproject.JWT.JWTUtil;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -27,7 +29,9 @@ public class MapController {
     @ResponseBody
     @GetMapping("/user/t1")
     public String user(Authentication authentication){
+
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+
         log.info(principal.getUserInfo().getUserId());
         log.info("오어스 정보 {} " +principal.getUserInfo());
         return "userTeST";

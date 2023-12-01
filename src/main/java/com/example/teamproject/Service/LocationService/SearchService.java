@@ -36,6 +36,8 @@ public class SearchService {
         }
     }
 
+
+
     public List<LocationDto> findWithinRange(SearchDto dto) {
         try {
             dto.calculateRange();
@@ -50,7 +52,10 @@ public class SearchService {
             return null;
         }
     }
-
+    /**
+     * @Method LocationToLocationDto -> Location을 -> DTO로 변환
+     * 한개의 정보들을 불러오는 함수.
+     */
     public InformationDto findLocationInformation(SearchInformationDto dto) {
         try {
             int locationId = getLocationId(dto.getLatitude(), dto.getLongitude(), dto.getCategory());
@@ -61,7 +66,6 @@ public class SearchService {
             return InformationDto.locationToInformationDto(result.get());
         } catch (Exception e){
             log.info(e.getMessage());
-
             return null;
         }
     }

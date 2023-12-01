@@ -1,11 +1,8 @@
 package com.example.teamproject.JpaClass.LocationTable;
-
-import com.example.teamproject.Dto.LocationDto.LocationDto;
-import com.example.teamproject.Dto.LocationDto.RegisterDto;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
+import com.example.teamproject.JpaClass.CommunityTable.UserPostEntity;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,6 +33,9 @@ public class Location {
     private String title;
     @Column
     private String description;
+    @OneToMany(mappedBy = "location",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    private List<UserPostEntity> userPostEntityList = new ArrayList<>();
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

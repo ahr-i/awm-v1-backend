@@ -1,17 +1,12 @@
 package com.example.teamproject.Controller.LocationController;
-
 import com.example.teamproject.Dto.LocationDto.InformationDto;
 import com.example.teamproject.Dto.LocationDto.LocationDto;
 import com.example.teamproject.Dto.LocationDto.SearchDto;
 import com.example.teamproject.Dto.LocationDto.SearchInformationDto;
-import com.example.teamproject.JpaClass.LocationTable.Location;
 import com.example.teamproject.Service.LocationService.SearchService;
-import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +16,7 @@ import java.util.List;
 @Slf4j
 @RestController
 public class SearchController {
+
     private final SearchService service;
 
     @GetMapping("/in-range")
@@ -33,7 +29,6 @@ public class SearchController {
             return ResponseEntity.badRequest().body("in-range에 문제가 발생했습니다.");
         }
     }
-
     @GetMapping("/within-range")
     public ResponseEntity searchWithinRangeLocation(@ModelAttribute SearchDto dto) {
         List<LocationDto> response = service.findWithinRange(dto);
@@ -47,9 +42,11 @@ public class SearchController {
 
     @GetMapping("/information")
     public ResponseEntity searchLocationInformation(@ModelAttribute SearchInformationDto dto) {
+
         InformationDto response = service.findLocationInformation(dto);
 
         if(response != null) {
+
             return ResponseEntity.ok().body(response);
         } else {
             return ResponseEntity.badRequest().body("찾을 수 없는 장소입니다.");

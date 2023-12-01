@@ -12,6 +12,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.util.Set;
+
 @Slf4j
 @RequiredArgsConstructor
 @Component
@@ -30,7 +32,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         ChatRoom room = chatService.findRoomById(chatMessage.getRoomId());
         log.info("room : {}",room.toString());
 
-        room.handleActions(session,chatMessage, chatService);
+        //room.handleActions(session,chatMessage, chatService);
     }
 
     /** Client가 접속 시 호출되는 메서드*/

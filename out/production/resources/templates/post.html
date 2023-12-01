@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Test</title>
+</head>
+<body>
+<h2>Image Upload Test</h2>
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="imageFile" name="imageFile" accept="image/*">
+    <button type="submit">Upload Image</button>
+</form>
+
+<script>
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var imageFile = document.getElementById('imageFile').files[0];
+        var formData = new FormData();
+        formData.append('imageFile', imageFile);
+
+        fetch('/PostTest', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if(response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Server returned an error');
+                }
+            })
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+</html>

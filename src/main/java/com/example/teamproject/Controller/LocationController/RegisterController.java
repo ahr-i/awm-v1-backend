@@ -18,16 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RegisterController {
     private final RegisterService service;
-
     @PostMapping("/register")
     public ResponseEntity registerLocation(@RequestBody RegisterDto dto, Authentication authentication){
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
         Boolean result = service.register(dto, principalDetails.getUserInfo().getUserId());
-
         if(result) {
             return ResponseEntity.ok().body("장소 등록에 성공했습니다.");
-        } else {
-            return ResponseEntity.badRequest().body("장소 등록에 실패했습니다.");
-        }
+        } else {return ResponseEntity.badRequest().body("장소 등록에 실패했습니다.");}
     }
+
 }

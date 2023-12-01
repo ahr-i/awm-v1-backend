@@ -21,7 +21,7 @@ public class CommentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String commentWriter;
-    private String commentContents;
+    private String commentContent;
     @CreationTimestamp
     private LocalDateTime creatTime;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,4 +30,5 @@ public class CommentEntity {
     private BoardEntity entity;
     private int report;
     private int likeCount;
+    private String userId;
 }

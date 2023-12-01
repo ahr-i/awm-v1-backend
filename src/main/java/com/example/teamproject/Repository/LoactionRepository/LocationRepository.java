@@ -12,13 +12,24 @@ import java.util.List;
 @Transactional
 public interface LocationRepository extends JpaRepository<Location,Integer> {
     @Modifying
-    @Query(value = "update Location l set l.score = l.score + 100 where l.locationId =:locationId")  // 변경 필요
-    void updateScore(@Param("locationId") int id);
+    @Query("update Location l set l.score = l.score + :score where l.locationId =:locationId")
+    void updateScore(int locationId, int score);
 
     @Modifying
-    @Query("SELECT l FROM Location l WHERE l.latitude BETWEEN (:latitude - :range) AND (:latitude + :range) AND l.longitude BETWEEN (:longitude - :range) AND (:longitude + :range) AND l.score >= 100")
-    List<Location> findLocationsInRange(double latitude, double longitude, double range);
+    @Query("update Location l set l.visitCount = l.visitCount + 1 where l.locationId = :locationId")
+    void upVisitCount(int locationId);
 
-    @Query("SELECT l FROM Location l WHERE l.latitude BETWEEN :latitude - :range AND :latitude + :range AND l.longitude BETWEEN :longitude - :range AND :longitude + :range AND l.category = :category")
-    List<Location> findLocationByCategoryInRange(double latitude, double longitude, double range, String category);
+    @Modifying
+    @Query("SELECT l FROM Location l WHERE l.latitude BETWEEN (:latitude - :latitudeRange) AND (:latitude + :latitudeRange) AND l.longitude BETWEEN (:longitude - :longitudeRange) AND (:longitude + :longitudeRange) AND l.score >= :score")
+    List<Location> findLocationsInRange(double latitude, double longitude, double latitudeRange, double longitudeRange, int score);
+
+    @Modifying
+    @Query("SELECT l FROM Location l WHERE (l.latitude BETWEEN (:latitude - :maxLatitudeRange) AND (:latitude - :minLatitudeRange) OR l.latitude BETWEEN (:latitude + :minLatitudeRange) AND (:latitude + :maxLatitudeRange)) AND (l.longitude BETWEEN (:longitude - :maxLongitudeRange) AND (:longitude - :minLongitudeRange) OR l.longitude BETWEEN (:longitude + :minLongitudeRange) AND (:longitude + :maxLongitudeRange)) AND l.score >= :score")
+    List<Location> findLocationsWithinRange(double latitude, double longitude, double maxLatitudeRange, double maxLongitudeRange, double minLatitudeRange, double minLongitudeRange, int score);
+
+    @Query("SELECT l FROM Location l WHERE l.latitude BETWEEN (:latitude - :latitudeRange) AND (:latitude + :latitudeRange) AND l.longitude BETWEEN (:longitude - :longitudeRange) AND (:longitude + :longitudeRange) AND l.category = :category")
+    List<Location> findLocationByCategoryInRange(double latitude, double longitude, double latitudeRange, double longitudeRange, String category);
+
+    @Query("SELECT l FROM Location l WHERE l.latitude = :latitude AND l.longitude = :longitude AND l.category = :category")
+    List<Location> findLocationByCategory(double latitude, double longitude, String category);
 }

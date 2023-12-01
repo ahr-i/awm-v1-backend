@@ -17,7 +17,5 @@ public class Contributor {
     @Column
     private int locationId;
     @Column
-    private int registerId;
-    @Column
     private int rate;
 }

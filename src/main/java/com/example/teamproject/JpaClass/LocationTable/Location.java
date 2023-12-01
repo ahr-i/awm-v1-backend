@@ -1,5 +1,7 @@
 package com.example.teamproject.JpaClass.LocationTable;
 
+import com.example.teamproject.Dto.LocationDto.LocationDto;
+import com.example.teamproject.Dto.LocationDto.RegisterDto;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,10 +28,16 @@ public class Location {
     private int score;
     @Column
     private int visitCount;
-    @Column
+    @Column(nullable = false)
     private LocalDateTime createdAt;
     @OneToMany(mappedBy = "location" , cascade = CascadeType.REMOVE ,orphanRemoval = true)
     private List<BoardEntity> entityList = new ArrayList<>();
-
-
+    @Column
+    private String title;
+    @Column
+    private String description;
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

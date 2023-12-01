@@ -12,17 +12,14 @@ import org.springframework.web.socket.WebSocketSession;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ChatService {
     // JSON 매핑을 위한 ObjectMapper 주입
-    private final ObjectMapper objectMapper;
+    //private final ObjectMapper objectMapper;
     // 채팅방 정보를 담은 맵
     private Map<String, ChatRoom> chatRooms;
 
@@ -43,12 +40,15 @@ public class ChatService {
     }
 
     // 채팅방 생성, 리팩토링 완료
-    public ChatRoom createRoom(String name){
-        ChatRoom chatRoom = new ChatRoom().create(name);
+    public ChatRoom createRoom(String locationId){
+        ChatRoom chatRoom = new ChatRoom().create(locationId);
+        chatRooms.put(locationId, chatRoom);
         return chatRoom;
     }
 
     // WebSocket 세션에 메시지를 전송하는 메소드
+    // STOMP 방식으로 동작하므로 기존의 세션관련 코드는 비활성화
+    /*
     public <T> void sendMessage(WebSocketSession session, T message){
         try{
             session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
@@ -57,6 +57,8 @@ public class ChatService {
         }
     }
 
+     */
+
     public List<Chat> getAllMessages(){
         return chatMessageRepository.findAll();
     }
@@ -64,4 +66,6 @@ public class ChatService {
     public void saveMessage(Chat message){
         chatMessageRepository.save(message);
     }
+
+
 }

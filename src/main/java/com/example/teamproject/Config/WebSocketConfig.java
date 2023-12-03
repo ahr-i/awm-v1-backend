@@ -1,6 +1,7 @@
 package com.example.teamproject.Config;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.WebSocketHandler;
@@ -11,6 +12,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 @RequiredArgsConstructor
+@Slf4j
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     // WebSocket 핸들러를 주입받아서 사용하는 생성자
     private final WebSocketHandler webSocketHandler;
@@ -40,6 +42,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
      */
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chat/{roomId}").setAllowedOrigins("*").withSockJS();
+        try{
+            registry.addEndpoint("/connection")
+                    .setAllowedOrigins("*");
+                    //.withSockJS(); // SockJS를 사용하는 경우에만 주석 해제
+        } catch (Exception e){
+            log.error("Error during WebSocket handshake:", e);
+        }
     }
 }

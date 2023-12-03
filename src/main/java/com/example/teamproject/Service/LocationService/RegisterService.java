@@ -5,13 +5,16 @@ import com.example.teamproject.JpaClass.LocationTable.Contributor;
 import com.example.teamproject.JpaClass.LocationTable.Location;
 import com.example.teamproject.JpaClass.LocationTable.LocationImage;
 import com.example.teamproject.Repository.LoactionRepository.ContributorRepository;
+import com.example.teamproject.Repository.LoactionRepository.LocationImageRepository;
 import com.example.teamproject.Repository.LoactionRepository.LocationRepository;
 import com.example.teamproject.Setting.LocationSetting;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,26 +22,41 @@ import java.util.List;
 public class RegisterService {
     private final LocationRepository locationRepository;
     private final ContributorRepository contributorRepository;
+    private final LocationImageRepository locationImageRepository;
     private final LocationSetting setting;
 
     public boolean register(RegisterDto dto, String userId) {
         try {
-            int existingLocationId = getLocationId(dto.getLatitude(), dto.getLongitude(), dto.getCategory());
-
-            if(existingLocationId != -1) {
-                locationRepository.updateScore(existingLocationId, setting.getRegisterBaseScore());
-
-                return true;
-            }
             dto.setUserId(userId);
 
             Location location = RegisterDto.toLocation(dto);
             Contributor contributor = RegisterDto.toContributor(dto);
-            LocationImage locationImage = RegisterDto.toLocationImage(dto);
 
-            int locationId = locationRepository.save(location).getLocationId();
+            int existingLocationId = getLocationId(dto.getLatitude(), dto.getLongitude(), dto.getCategory());
+            int locationId = 0;
 
-            locationImage.setLocationId(locationId);
+            if(existingLocationId != -1) {
+                locationId = existingLocationId;
+                location.setLocationId(locationId);
+                Optional<Location> existingLocation = locationRepository.findById(locationId);
+
+                if (existingLocation.isPresent()) {
+                    Location updatedLocation = existingLocation.get();
+
+                    updatedLocation.setTitle(dto.getTitle());
+                    updatedLocation.setDescription(dto.getDescription());
+                }
+            } else {
+                locationId = locationRepository.save(location).getLocationId();
+            }
+
+            if(dto.getImage() != null) {
+                LocationImage locationImage = RegisterDto.toLocationImage(dto);
+
+                locationImage.setLocationId(locationId);
+
+                locationImageRepository.save(locationImage);
+            }
             contributor.setLocationId(locationId);
             contributor.setRate(setting.getUserRate());
 

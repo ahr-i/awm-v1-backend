@@ -53,6 +53,17 @@ public class SearchController {
         }
     }
 
+    @GetMapping("/get-location-id")
+    public ResponseEntity searchLocationId(@ModelAttribute SearchInformationDto dto) {
+        LocationDto response = service.findLocationId(dto);
+
+        if(response != null) {
+            return ResponseEntity.ok().body(response);
+        } else {
+            return ResponseEntity.badRequest().body("찾을 수 없는 장소입니다.");
+        }
+    }
+
     /*
     @GetMapping("/images")
     public ResponseEntity searchLocationImages(@ModelAttribute SearchInformationDto dto) {

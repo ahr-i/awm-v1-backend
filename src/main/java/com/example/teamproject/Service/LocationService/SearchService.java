@@ -68,6 +68,21 @@ public class SearchService {
         }
     }
 
+    public LocationDto findLocationId(SearchInformationDto dto) {
+        try {
+            int locationId = getLocationId(dto.getLatitude(), dto.getLongitude(), dto.getCategory());
+            LocationDto response = new LocationDto();
+
+            response.setLocationId(locationId);
+
+            return response;
+        } catch (Exception e){
+            log.info(e.getMessage());
+
+            return null;
+        }
+    }
+
     public int getLocationId(double latitude, double longitude, String category) {
         List<Location> result = repository.findLocationByCategory(latitude, longitude, category);
 

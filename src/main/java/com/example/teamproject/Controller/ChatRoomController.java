@@ -50,8 +50,9 @@ public class ChatRoomController {
             return ResponseEntity.badRequest().body("채팅방이 존재하지 않음");
         }
 
+
         model.addAttribute("roomId", roomId);
-        return ResponseEntity.ok().body("채팅방 입장");
+        return ResponseEntity.ok().body(roomId + " 채팅방 입장");
     }
 
 

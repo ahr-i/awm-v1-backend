@@ -1,9 +1,6 @@
 package com.example.teamproject.Controller.LocationController;
 
-import com.example.teamproject.Dto.LocationDto.InformationDto;
-import com.example.teamproject.Dto.LocationDto.LocationDto;
-import com.example.teamproject.Dto.LocationDto.SearchDto;
-import com.example.teamproject.Dto.LocationDto.SearchInformationDto;
+import com.example.teamproject.Dto.LocationDto.*;
 import com.example.teamproject.JpaClass.LocationTable.Location;
 import com.example.teamproject.Service.LocationService.SearchService;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
@@ -55,4 +52,17 @@ public class SearchController {
             return ResponseEntity.badRequest().body("찾을 수 없는 장소입니다.");
         }
     }
+
+    /*
+    @GetMapping("/images")
+    public ResponseEntity searchLocationImages(@ModelAttribute SearchInformationDto dto) {
+        List<ImageDto> response = service.findImages(dto);
+
+        if(response != null) {
+            return ResponseEntity.ok().body(response);
+        } else {
+            return ResponseEntity.badRequest().body("해당하는 장소가 없습니다.");
+        }
+    }
+    */
 }

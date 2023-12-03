@@ -1,10 +1,9 @@
 package com.example.teamproject.Service.LocationService;
 
-import com.example.teamproject.Dto.LocationDto.InformationDto;
-import com.example.teamproject.Dto.LocationDto.LocationDto;
-import com.example.teamproject.Dto.LocationDto.SearchDto;
-import com.example.teamproject.Dto.LocationDto.SearchInformationDto;
+import com.example.teamproject.Dto.LocationDto.*;
 import com.example.teamproject.JpaClass.LocationTable.Location;
+import com.example.teamproject.JpaClass.LocationTable.LocationImage;
+import com.example.teamproject.Repository.LoactionRepository.LocationImageRepository;
 import com.example.teamproject.Repository.LoactionRepository.LocationRepository;
 import com.example.teamproject.Setting.LocationSetting;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +19,7 @@ import java.util.Optional;
 public class SearchService {
     private final LocationSetting setting;
     private final LocationRepository repository;
+    private final LocationImageRepository locationImageRepository;
 
     public List<LocationDto> findInRange(SearchDto dto) {
         try {
@@ -55,10 +55,12 @@ public class SearchService {
         try {
             int locationId = getLocationId(dto.getLatitude(), dto.getLongitude(), dto.getCategory());
             Optional<Location> result = repository.findById(locationId);
+            List<byte[]> images = locationImageRepository.findByLocationId(locationId);
+            List<ImageDto> imageDtos = ImageDto.locationImageToDto(images);
 
             repository.upVisitCount(locationId);
 
-            return InformationDto.locationToInformationDto(result.get());
+            return InformationDto.locationToInformationDto(result.get(), imageDtos);
         } catch (Exception e){
             log.info(e.getMessage());
 
@@ -75,4 +77,21 @@ public class SearchService {
             return -1;
         }
     }
+
+    /*
+    public List<ImageDto> findImages(SearchInformationDto dto) {
+        try {
+            int locationId = getLocationId(dto.getLatitude(), dto.getLongitude(), dto.getCategory());
+
+            List<byte[]> result = locationImageRepository.findByLocationId(locationId);
+            List<ImageDto> response = ImageDto.locationImageToDto(result);
+
+            return response;
+        } catch (Exception e) {
+            log.info(e.getMessage());
+
+            return null;
+        }
+    }
+    */
 }

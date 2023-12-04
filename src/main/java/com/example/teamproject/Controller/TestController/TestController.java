@@ -22,6 +22,9 @@ public class TestController {
 
     private final ImageTestRepository repository;
 
+    @GetMapping("/chatTest")
+    public String chatTest(){return "chat";}
+
     @GetMapping("/PostTest")
     public String save1() {
         return "post";

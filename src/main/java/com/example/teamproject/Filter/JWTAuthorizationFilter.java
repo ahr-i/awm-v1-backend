@@ -65,23 +65,24 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         try {
-
-
             String token = authorization.split(" ")[1];
-            Claims userName = JWTUtil.getUserName(token);
+
+
+            Claims userName = JWTUtil.getUserName(token,response);
+            if(userName != null) {
             String provider = userName.get("provider",String.class);
+
             if (userName != null) {
 
-                if(provider.equals("google") || provider.equals("naver")){
-                    String oauth2UserProviderId = userName.get("username",String.class);
+                if (provider.equals("google") || provider.equals("naver")) {
+                    String oauth2UserProviderId = userName.get("username", String.class);
                     Oauth2UserEntity entity = oauth2Repository.findByProviderUserId(oauth2UserProviderId).get();
                     UserDto dto = UserDto.oauthTransferEntity(entity);
                     PrincipalDetails details = new PrincipalDetails(dto);
-                    Authentication authentication = new UsernamePasswordAuthenticationToken(details,null,details.getAuthorities());
+                    Authentication authentication = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                    chain.doFilter(request,response);
-                }
-                else {
+                    chain.doFilter(request, response);
+                } else {
 
                     String userId = userName.get("username", String.class);
                     Optional<UserEntity> byUserId = repository.findByUserId(userId);
@@ -93,6 +94,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     chain.doFilter(request, response);
                 }
+            }
             }
         } catch (SignatureException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

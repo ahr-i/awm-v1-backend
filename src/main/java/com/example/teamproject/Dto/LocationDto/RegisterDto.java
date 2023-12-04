@@ -5,6 +5,8 @@ import com.example.teamproject.JpaClass.LocationTable.Location;
 import com.example.teamproject.JpaClass.LocationTable.LocationImage;
 import lombok.Data;
 
+import java.util.Base64;
+
 @Data
 public class RegisterDto {
     private double latitude;
@@ -13,7 +15,7 @@ public class RegisterDto {
     private String category;
     private String title;
     private String description;
-    private byte[] image;
+    private String image;
 
     static public Location toLocation(RegisterDto dto) {
         Location location = new Location();
@@ -38,7 +40,7 @@ public class RegisterDto {
     static public LocationImage toLocationImage(RegisterDto dto) {
         LocationImage locationImage = new LocationImage();
 
-        locationImage.setImage(dto.getImage());
+        locationImage.setImage(Base64.getDecoder().decode(dto.getImage()));
 
         return locationImage;
     }

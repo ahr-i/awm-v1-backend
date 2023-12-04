@@ -43,12 +43,12 @@ public class BoardService {
     private final UserPostRepository logBoardRepository;
     private final LogBoardCountEntityRepository logBoardCountEntityRepository;
 
-    public ResponseEntity BoardSave(BoardDto dto, int locationId,MultipartFile file,Authentication authentication) {
+    public ResponseEntity BoardSave(BoardDto dto, int locationId, MultipartFile file, Authentication authentication) {
         try {
 
             Optional<Location> locationEntity = locationRepository.findById(locationId);
 
-            if(locationEntity.isPresent()) {
+            if (locationEntity.isPresent()) {
                 PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
                 String userId = principal.getUserInfo().getUserId();
                 BoardEntity boardEntity = BoardDto.SaveToBoardEntity(dto, locationEntity, userId, file);
@@ -60,7 +60,7 @@ public class BoardService {
             log.info("IO 예외 {}", e.getMessage());
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 처리 중 에러가 발생 했습니다.");
         }
-       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("글을 등록할 수 없습니다.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("글을 등록할 수 없습니다.");
     }
 
     @Transactional
@@ -92,18 +92,18 @@ public class BoardService {
         } else return ResponseEntity.status(HttpStatus.NO_CONTENT).body("해당 게시글이 존재 하지 않습니다.");
     }
 
-    public ResponseEntity removeBoardPost(int postId,Authentication authentication) {
+    public ResponseEntity removeBoardPost(int postId, Authentication authentication) {
 
         Optional<BoardEntity> byId = repository.findById(postId);
 
-        if(byId.isPresent()) {
+        if (byId.isPresent()) {
             PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
             String userId = principal.getUserInfo().getUserId();
-            if(userId.equals(byId.get().getUserId())) {
-               return ResponseEntity.ok().body("삭제가 완료 되었습니다.");
-            }else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유저가 일치 하지 않습니다.");
+            if (userId.equals(byId.get().getUserId())) {
+                return ResponseEntity.ok().body("삭제가 완료 되었습니다.");
+            } else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유저가 일치 하지 않습니다.");
 
-        }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제된 게시글이거나 해당 경로가 없습니다.");
+        } else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제된 게시글이거나 해당 경로가 없습니다.");
     }
 
     public String findUser(int postId) {
@@ -162,7 +162,7 @@ public class BoardService {
             PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
             String userId = principal.getUserInfo().getUserId();
             String nickName = principal.getUserInfo().getNickName();
-            logBoardRepository.save(UserLogDto.TransferUserEntity(dto, byId, userId,nickName));
+            logBoardRepository.save(UserLogDto.TransferUserEntity(dto, byId, userId, nickName));
             return ResponseEntity.ok().body("등록이 완료 되었습니다.");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("게시글을 등록할 수 없습니다.");
@@ -195,62 +195,56 @@ public class BoardService {
         if (byId.isPresent()) {
             if (userId.equals(byId.get().getUserId())) {
                 logBoardRepository.delete(byId.get());
-              return   ResponseEntity.ok().body("삭제가 완료 되었습니다.");
+                return ResponseEntity.ok().body("삭제가 완료 되었습니다.");
 
-            }else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유저가 일치하지 않습니다.");
+            } else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유저가 일치하지 않습니다.");
 
-        }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당 글이 없거나 잘못된 요청입니다.");
+        } else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당 글이 없거나 잘못된 요청입니다.");
     }
-    public void likeCountPlus(int postId){
-         logBoardRepository.updateHit(postId);
+
+    public void likeCountPlus(int postId) {
+        logBoardRepository.updateHit(postId);
     }
-    public void badCountPlus(int postId){
+
+    public void badCountPlus(int postId) {
         logBoardRepository.updateBadCountHit(postId);
     }
-    public ResponseEntity checkLogBoardLike(int postId,Authentication authentication){
-        Optional<LogBoardCountEntity> likePost = logBoardCountEntityRepository.findByLogBoardEntity_IdAndCountCheck(postId,1);
-        Optional<UserPostEntity> byId = logBoardRepository.findById(postId);
+
+    public ResponseEntity checkLogBoardLike(int postId, Authentication authentication) {
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
         String userId = principal.getUserInfo().getUserId();
-        if(!likePost.isEmpty()) {
+        Optional<LogBoardCountEntity> likePost = logBoardCountEntityRepository.
+                findByLogBoardEntity_IdAndCountCheckAndUserId(postId, 1, userId);
+        Optional<UserPostEntity> byId = logBoardRepository.findById(postId);
 
-            if(likePost.get().getUserId().equals(userId) && likePost.get().getCountCheck() == 1) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당글에 이미 좋아요를 했습니다.");
+        if (!likePost.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당글에는 이미 좋아요를 하였습니다.");
+        } else {
+            if (byId.isPresent()) {
+                logBoardCountEntityRepository.save(LogBoardCountEntity.likeCount(userId, byId.get()));
+                return ResponseEntity.status(HttpStatus.OK).body("좋아요 등록 되었습니다.");
             }
-            }else {
-
-            if(byId.isPresent()){
-                LogBoardCountEntity entity = LogBoardCountEntity.likeCount(userId, byId.get());
-                likeCountPlus(postId);
-                logBoardCountEntityRepository.save(entity);
-                return  ResponseEntity.status(HttpStatus.OK).body("좋아요가 완료 되었습니다");
-
-            }else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 글을 찾을 수 없습니다.");
-
-            }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("잘못된 요청 입니다.");
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("글이 없거나 잘못된 요청입니다.");
     }
 
-    public ResponseEntity checkLogBoardBadCount(int postId,Authentication authentication) {
-        Optional<LogBoardCountEntity> logPost = logBoardCountEntityRepository.findByLogBoardEntity_IdAndCountCheck(postId,0);
+    public ResponseEntity checkLogBoardBadCount(int postId, Authentication authentication) {
         Optional<UserPostEntity> byId = logBoardRepository.findById(postId);
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
         String userId = principal.getUserInfo().getUserId();
+        Optional<LogBoardCountEntity> logPost =
+                logBoardCountEntityRepository.findByLogBoardEntity_IdAndCountCheckAndUserId(postId, 0, userId);
 
-        if(!logPost.isEmpty()) {
 
-            if(logPost.get().getUserId().equals(userId) && logPost.get().getCountCheck() == 0) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("싫어요를 이미 하였습니다.");
-            } else {
-                if(!byId.isPresent()) {
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 글을 찾을 수 없습니다.");}
+        if (!logPost.isEmpty())
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당글에는 이미 싫어요를 하였습니다.");
+
+        else {
+            if (byId.isPresent()) {
+                logBoardCountEntityRepository.save(LogBoardCountEntity.BadCount(byId.get(), userId));
+                return ResponseEntity.status(HttpStatus.OK).body("싫어요가 등록 되었습니다.");
             }
-
-        }else {
-            badCountPlus(postId);
-            logBoardCountEntityRepository.save(LogBoardCountEntity.BadCount(byId.get(),userId));
-            return ResponseEntity.status(HttpStatus.OK).body("싫어요가 등록 되었습니다.");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘못된 요청 입니다.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("글이 없거나 잘못된 요청입니다.");
     }
 }

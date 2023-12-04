@@ -44,7 +44,7 @@ public class UserDto {
     /**
      * 조인 부분의 상세 설정들을 넣어서 save시킬 용도
      */
-        public static UserEntity UserDtoTransferUser(UserDto user){
+    public static UserEntity UserDtoTransferUser(UserDto user){
         String randomName = CharacterName.getRandomName();
         UserEntity users = new UserEntity();
         users.setUserId(user.getUserId());

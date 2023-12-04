@@ -56,7 +56,7 @@ public class JwtAuthentication extends UsernamePasswordAuthenticationFilter {
              */
             Authentication authenticate = manager.authenticate(token);
 
-          
+
 
             return authenticate; // < -- 반드시 authenticate가 되어야 한다 리턴값은
         } catch (IOException e) {
@@ -77,12 +77,13 @@ public class JwtAuthentication extends UsernamePasswordAuthenticationFilter {
             ObjectMapper mapper = new ObjectMapper();
             mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             String jsonUser = mapper.writeValueAsString(dto);
-
+            response.addHeader("Authorization","Bearer "+jwtToken);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(jsonUser);
+            log.info("토큰 정보 : ",jwtToken);
         }
-        log.info("토큰 정보 : ",jwtToken);
-        response.addHeader("Authorization","Bearer "+jwtToken);
+
+
     }
 }

@@ -1,8 +1,6 @@
 package com.example.teamproject.JpaClass.UserTable;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -37,8 +35,6 @@ public class UserEntity {
     private String password;
     @Column
     @CreationTimestamp
-    @JsonSerialize
-    @JsonDeserialize
     private LocalDateTime creatAt;
     private String provider;
 }

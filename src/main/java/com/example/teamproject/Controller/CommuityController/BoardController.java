@@ -27,7 +27,10 @@ import java.util.Map;
 @Slf4j
 @RestController
 public class BoardController {
-
+    /**
+     * 김동근 파트
+     * 커뮤니티에 대한 전반적인 crud를 기술한다.
+     */
 
     //글 생성
     private final BoardService service;
@@ -117,4 +120,16 @@ public class BoardController {
         ResponseEntity responseEntity = service.deleteLogBoard(postId, authentication);
         return responseEntity;
     }
+    @PostMapping("/user/logBoard/likeCount/{postId}")
+    public ResponseEntity likeCount(@PathVariable int postId,Authentication authentication){
+        ResponseEntity responseEntity = service.checkLogBoardLike(postId, authentication);
+        return responseEntity;
+    }
+    @PostMapping("/user/logBoard/badCount/{postId}")
+    public ResponseEntity badCount(@PathVariable int postId,Authentication authentication){
+        ResponseEntity responseEntity = service.checkLogBoardBadCount(postId, authentication);
+        return responseEntity;
+    }
+
+
 }

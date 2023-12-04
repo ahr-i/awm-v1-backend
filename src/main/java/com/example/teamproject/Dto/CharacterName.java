@@ -3,7 +3,7 @@ package com.example.teamproject.Dto;
 import java.util.Random;
 
 public enum CharacterName {
-    가렌, 카타리나, 제드;
+    익명의유저;
 
     public static String getRandomName() {
         Random random = new Random();

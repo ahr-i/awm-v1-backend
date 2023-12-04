@@ -1,6 +1,7 @@
 package com.example.teamproject.Dto;
 import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
 import com.example.teamproject.JpaClass.UserTable.UserEntity;
+import com.example.teamproject.ScreenShot.ScreenShotTransfer;
 import lombok.Data;
 
 @Data
@@ -52,7 +53,7 @@ public class UserDto {
         users.setNickName(randomName);
         users.setRankScore(0);
         users.setImageHash(null);
-        users.setImage(null);
+        users.setImage(ScreenShotTransfer.screenShotTransfer());
         users.setProvider("AppUser");
         return users;
     }

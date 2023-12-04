@@ -23,7 +23,6 @@ public class JwtAuthentication extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager manager;
 
-    private String secretKey ="key";
 
 
     public JwtAuthentication(AuthenticationManager manager){

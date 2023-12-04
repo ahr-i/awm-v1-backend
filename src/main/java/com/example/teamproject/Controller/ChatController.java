@@ -30,8 +30,7 @@ public class ChatController {
     // MessageMapping 을 통해 webSocket 로 들어오는 메시지를 발신 처리한다.
     // 이때 클라이언트에서는 /chat/message 로 요청하게 되고 이것을 controller 가 받아서 처리한다.
     // 처리가 완료되면 /topic/chat/room/roomId 로 메시지가 전송된다.
-    //@MessageMapping("/chat/message")
-    @PostMapping("/chat/message") // MessageMapping가 계속 404에러가 나서 POST로 변경, 이유는 모름
+    @MessageMapping("/chat/message")
     public void sendMessage(@Payload ChatMessage chatMessage) {
         try {
             // 클라이언트에서 전송한 방의 ID를 확인

@@ -77,7 +77,7 @@ public class SecurityConfig {
        http.csrf(AbstractHttpConfigurer :: disable);
        http.httpBasic(AbstractHttpConfigurer :: disable);
        http.formLogin(AbstractHttpConfigurer :: disable);
-       http.addFilterBefore(new JwtAuthentication(configuration.getAuthenticationManager()), UsernamePasswordAuthenticationFilter.class);
+       http.addFilterBefore(new JwtAuthentication(configuration.getAuthenticationManager(),repository), UsernamePasswordAuthenticationFilter.class);
        http.addFilter(new JWTAuthorizationFilter(configuration.getAuthenticationManager(),repository,oauth2Repository));
 
 

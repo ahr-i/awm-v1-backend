@@ -11,19 +11,18 @@ public class CommentDto {
 
     private int id;
     private String commentWriter;
-    private String commentContents;
+    private String commentContent;
     private LocalDateTime creatTime;
     private int postId;
 
-    public static CommentEntity TransferCommentEntity(CommentDto dto, BoardEntity entitys) {
+    public static CommentEntity TransferCommentEntity(CommentDto dto, BoardEntity entitys,String userId) {
         CommentEntity entity = new CommentEntity();
         entity.setReport(0);
-        entity.setCommentContents(dto.commentContents);
+        entity.setCommentContent(dto.commentContent);
         entity.setLikeCount(0);
         entity.setCommentWriter(dto.commentWriter);
         entity.setEntity(entitys);
-
+        entity.setUserId(userId);
         return entity;
     }
-
 }

@@ -7,10 +7,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Optional;
@@ -18,6 +20,7 @@ import java.util.Optional;
 @Getter
 @Setter
 @ToString
+@Slf4j
 public class BoardDto {
     private int postId;
     private String userId;
@@ -30,11 +33,10 @@ public class BoardDto {
     private LocalDateTime updateTime;
     private int likeCount;
     private int reportCount;
-    private MultipartFile frontToBackImage;
-    private String backToFrontImage;
+    private byte[] image;
     private long commentCount;
 
-    public static BoardEntity SaveToBoardEntity(BoardDto dto, Optional<Location> location, String userId) throws IOException {
+    public static BoardEntity SaveToBoardEntity(BoardDto dto, Optional<Location> location, String userId,MultipartFile file) throws IOException {
         BoardEntity entity = new BoardEntity();
         entity.setUserId(userId);
         entity.setPostId(dto.getPostId());
@@ -45,8 +47,11 @@ public class BoardDto {
         entity.setBoardHits(dto.getBoardHit());
         entity.setLikeCount(0);
         entity.setReportCount(0);
-        if(dto.getFrontToBackImage() == null) entity.setImageFile(null);
-        else entity.setImageFile(Base64.getDecoder().decode(dto.getFrontToBackImage().getBytes()));
+        if(file == null) entity.setImageFile(null);
+        else {
+            entity.setImageFile(file.getBytes());
+
+        }
         return entity;
     }
     public static BoardDto DetailToBoardDto(BoardEntity entity){
@@ -60,8 +65,8 @@ public class BoardDto {
         dto.setBoardTitle(entity.getBoardTitle());
         dto.setBoardContent(entity.getBoardContent());
         dto.setUserId(entity.getUserId());
-        if(entity.getImageFile() == null) dto.setBackToFrontImage(null);
-        else dto.setBackToFrontImage(Base64.getEncoder().encodeToString(entity.getImageFile()));
+        if(entity.getImageFile() == null) dto.setImage(null);
+        else dto.setImage(entity.getImageFile());
         return dto;
     }
     public static Page<BoardDto> PageToBoardPostDto(Page<BoardEntity> entities, CommentRepository repository) {
@@ -74,13 +79,15 @@ public class BoardDto {
            dto.setBoardWriter(entity.getBoardWriter());
            dto.setCreateTime(entity.getCreateTime());
            dto.setCommentCount(repository.countAllByEntity(entity));
+           if(entity.getImageFile() == null) dto.setImage(null);
+           else dto.setImage(entity.getImageFile());
             return dto;
         });
     }
     public static BoardEntity updatePost(BoardDto dto,BoardEntity entity) throws IOException {
         entity.setBoardTitle(dto.getBoardTitle());
         entity.setBoardContent(dto.getBoardContent());
-        if(dto.getFrontToBackImage() != null)entity.setImageFile(dto.getFrontToBackImage().getBytes());
+
         return entity;
     }
 }

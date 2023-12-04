@@ -1,6 +1,7 @@
 package com.example.teamproject.Dto;
 import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
 import com.example.teamproject.JpaClass.UserTable.UserEntity;
+import com.example.teamproject.ScreenShot.ScreenShotTransfer;
 import lombok.Data;
 
 @Data
@@ -43,7 +44,7 @@ public class UserDto {
     /**
      * 조인 부분의 상세 설정들을 넣어서 save시킬 용도
      */
-        public static UserEntity UserDtoTransferUser(UserDto user){
+    public static UserEntity UserDtoTransferUser(UserDto user){
         String randomName = CharacterName.getRandomName();
         UserEntity users = new UserEntity();
         users.setUserId(user.getUserId());
@@ -52,7 +53,7 @@ public class UserDto {
         users.setNickName(randomName);
         users.setRankScore(0);
         users.setImageHash(null);
-        users.setImage(null);
+        users.setImage(ScreenShotTransfer.screenShotTransfer());
         users.setProvider("AppUser");
         return users;
     }

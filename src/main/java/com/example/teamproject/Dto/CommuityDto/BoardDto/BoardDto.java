@@ -2,8 +2,7 @@ package com.example.teamproject.Dto.CommuityDto.BoardDto;
 
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
 import com.example.teamproject.JpaClass.LocationTable.Location;
-import com.example.teamproject.Repository.CommuityRepository.CommentRepository;
-import lombok.Data;
+import com.example.teamproject.Repository.MySQL.CommuityRepository.CommentRepository;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,9 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDateTime;
-import java.util.Base64;
 import java.util.Optional;
 
 @Getter

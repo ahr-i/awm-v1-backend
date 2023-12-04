@@ -2,9 +2,8 @@ package com.example.teamproject.Service.LocationService;
 
 import com.example.teamproject.Dto.LocationDto.*;
 import com.example.teamproject.JpaClass.LocationTable.Location;
-import com.example.teamproject.JpaClass.LocationTable.LocationImage;
-import com.example.teamproject.Repository.LoactionRepository.LocationImageRepository;
-import com.example.teamproject.Repository.LoactionRepository.LocationRepository;
+import com.example.teamproject.Repository.MySQL.LoactionRepository.LocationImageRepository;
+import com.example.teamproject.Repository.MySQL.LoactionRepository.LocationRepository;
 import com.example.teamproject.Setting.LocationSetting;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

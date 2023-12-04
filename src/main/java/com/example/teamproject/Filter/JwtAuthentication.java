@@ -3,7 +3,7 @@ package com.example.teamproject.Filter;
 import com.example.teamproject.Dto.UserDto;
 import com.example.teamproject.JWT.JWTUtil;
 import com.example.teamproject.JpaClass.UserTable.UserEntity;
-import com.example.teamproject.Repository.JpaRepository.UserRepository;
+import com.example.teamproject.Repository.MySQL.JpaRepository.UserRepository;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -13,9 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

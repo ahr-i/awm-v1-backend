@@ -2,16 +2,12 @@ package com.example.teamproject.Service;
 
 import com.example.teamproject.Dto.ChatDto.ChatRoom;
 import com.example.teamproject.JpaClass.ChatTable.Chat;
-import com.example.teamproject.Repository.ChatRepository.ChatMessageRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.teamproject.Repository.MySQL.ChatRepository.ChatMessageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 import java.util.*;
 
 @Service

@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@Controller
+
 @RequiredArgsConstructor
 @Log4j2
 public class ChatController {

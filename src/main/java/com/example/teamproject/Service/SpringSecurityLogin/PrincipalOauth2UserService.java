@@ -1,10 +1,9 @@
 package com.example.teamproject.Service.SpringSecurityLogin;
 
 //import com.example.teamproject.Repository.JPARePository;
-import com.example.teamproject.Dto.OauthDto;
 import com.example.teamproject.Dto.UserDto;
 import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
-        import com.example.teamproject.Repository.Oauth2Repository.Oauth2Repository;
+        import com.example.teamproject.Repository.MySQL.Oauth2Repository.Oauth2Repository;
 import com.example.teamproject.prvoider.Oauth2UserInfo;
 import com.example.teamproject.prvoider.googleOauthUser;
 import com.example.teamproject.prvoider.naverOauthUser;

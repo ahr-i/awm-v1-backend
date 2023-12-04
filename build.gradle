@@ -46,6 +46,12 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
 
+    //스프링 리액티브 웹
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation ('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
+    implementation 'org.mongodb:mongodb-driver-sync:4.4.3' // 몽고DB 드라이버 버전
+
     // 웹소켓 의존성 추가
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 }

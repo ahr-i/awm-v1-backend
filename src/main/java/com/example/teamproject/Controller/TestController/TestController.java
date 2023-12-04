@@ -1,7 +1,7 @@
 package com.example.teamproject.Controller.TestController;
 
 import com.example.teamproject.JpaClass.UserTable.ImageTest;
-import com.example.teamproject.Repository.ImageTestRepository;
+import com.example.teamproject.Repository.MySQL.ImageTestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

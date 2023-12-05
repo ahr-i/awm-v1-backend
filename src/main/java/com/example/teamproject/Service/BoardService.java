@@ -1,7 +1,7 @@
 package com.example.teamproject.Service;
 import com.example.teamproject.Dto.CommuityDto.BoardDto.BoardDto;
+import com.example.teamproject.Dto.CommuityDto.BoardDto.UserLogDto;
 import com.example.teamproject.Dto.CommuityDto.Response;
-import com.example.teamproject.Dto.UserLogDto;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
 import com.example.teamproject.JpaClass.CommunityTable.CommentEntity;
 import com.example.teamproject.JpaClass.CommunityTable.LogBoardCountEntity;
@@ -21,14 +21,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PipedReader;
 import java.util.List;
 import java.util.Optional;
 

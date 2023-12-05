@@ -3,12 +3,10 @@ package com.example.teamproject.Controller.CommuityController;
 
 
 import com.example.teamproject.Dto.CommuityDto.BoardDto.BoardDto;
-import com.example.teamproject.Dto.CommuityDto.Response;
-import com.example.teamproject.Dto.UserLogDto;
+import com.example.teamproject.Dto.CommuityDto.BoardDto.UserLogDto;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
 import com.example.teamproject.Service.BoardService;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -17,11 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 @RequiredArgsConstructor
 @Slf4j
@@ -99,7 +94,7 @@ public class BoardController {
      * 해당 (로그) 파트에 대한 글들을 수정 삭제 한다.
      */
     @PostMapping("user/log/save/{locationId}")
-    public ResponseEntity logUserSave(@RequestBody UserLogDto dto,@PathVariable int locationId,Authentication
+    public ResponseEntity logUserSave(@RequestBody UserLogDto dto, @PathVariable int locationId, Authentication
             authentication) {
         return service.saveLogPost(dto,locationId,authentication);
     }
@@ -130,6 +125,5 @@ public class BoardController {
         ResponseEntity responseEntity = service.checkLogBoardBadCount(postId, authentication);
         return responseEntity;
     }
-
 
 }

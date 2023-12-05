@@ -125,5 +125,11 @@ public class BoardController {
         ResponseEntity responseEntity = service.checkLogBoardBadCount(postId, authentication);
         return responseEntity;
     }
+    @GetMapping("user/profile")
+    public ResponseEntity userProFile(Authentication authentication){
+
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+        return ResponseEntity.ok().body(principal.getUserInfo());
+    }
 
 }

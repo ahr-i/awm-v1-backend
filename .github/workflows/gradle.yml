@@ -36,8 +36,8 @@ jobs:
     - name: Docker build & Push
       run: |
         echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-        docker build -t ${{ secrets.DOCKER_REPO }}:awm:latest .
-        docker push ${{ secrets.DOCKER_REPO }}:awm:latest
+        docker build -t ${{ secrets.DOCKER_REPO }}:awm .
+        docker push ${{ secrets.DOCKER_REPO }}:awm
 
   deploy:
     needs: build
@@ -54,6 +54,6 @@ jobs:
         script: |
           sudo docker stop $(sudo docker ps -a -q)
           sudo docker rm -f $(sudo docker ps -a -q)
-          sudo docker pull ${{ secrets.DOCKER_REPO }}:awm:latest
-          sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_REPO }}:awm:latest
+          sudo docker pull ${{ secrets.DOCKER_REPO }}:awm
+          sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_REPO }}:awm
           sudo docker image prune -f 

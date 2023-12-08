@@ -53,6 +53,7 @@ jobs:
         port: ${{ secrets.NCP_PORT }}
         script: |
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker rm -f $(sudo docker ps -a -q)
+          docker rm -f $(docker ps -la)
           sudo docker pull ${{ secrets.DOCKER_REPO }}:awm
           sudo docker run -d --network="host" ${{ secrets.DOCKER_REPO }}:awm
+          sudo docker rm -f $(sudo docker ps -a -q)

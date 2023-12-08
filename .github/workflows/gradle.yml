@@ -55,5 +55,5 @@ jobs:
           sudo docker stop $(sudo docker ps -a -q)
           sudo docker rm -f $(sudo docker ps -a -q)
           sudo docker pull ${{ secrets.DOCKER_REPO }}:awm
-          sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_REPO }}:awm
+          sudo docker run -d --network="host" ${{ secrets.DOCKER_REPO }}:awm
           sudo docker image prune -f 

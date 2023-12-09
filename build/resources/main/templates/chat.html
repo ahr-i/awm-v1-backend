@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+    <title>STOMP WebSocket Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        #chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #chat-box {
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+
+        #message-input {
+            width: 70%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #send-button {
+            padding: 8px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div id="chat-container">
+    <h2>STOMP WebSocket Test</h2>
+    <div id="chat-box"></div>
+    <br>
+    <input type="text" id="message-input" placeholder="Type your message...">
+    <button id="send-button" onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+    const socket = new SockJS('http://localhost:8080/connection');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, (frame) => {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/chat/room/your-room-id', (message) => {
+            console.log('Received message:', message.body); // 디버깅용 코드
+
+            try {
+                const chatMessage = JSON.parse(message.body);
+                const chatBox = document.getElementById("chat-box");
+
+                if (chatMessage.message) {
+                    // 클라이언트에서 전송한 메시지가 문자열인 경우 처리
+                    chatBox.innerHTML += `<p><strong>${chatMessage.nickName}:</strong> ${chatMessage.message}</p>`;
+                } else {
+                    // 클라이언트에서 전송한 메시지가 JSON 형식인 경우 처리
+                    chatBox.innerHTML += `<p><strong>${chatMessage.nickName}:</strong> ${chatMessage}</p>`;
+                }
+
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                console.error('Error parsing message:', error);
+            }
+        });
+
+
+
+    });
+
+    function sendMessage() {
+        const messageInput = document.getElementById("message-input");
+        const message = messageInput.value.trim();
+
+        if (message !== "") {
+            const chatMessage = {
+                roomId: "your-room-id", // 실제 채팅방 ID로 변경
+                nickName: "your-nickname", // 실제 닉네임으로 변경
+                message: message,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log("Sending message:", chatMessage);
+
+            stompClient.send("/app/chat/message", {}, JSON.stringify(chatMessage));
+            messageInput.value = "";
+        }
+    }
+</script>
+</body>
+</html>

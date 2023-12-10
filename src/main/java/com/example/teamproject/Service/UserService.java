@@ -88,9 +88,10 @@ public class UserService {
         }
     }
 
-    /* 성향이 비슷한 유저 추천 */
-    public UserProfileDto searchSimilarUser(String userId) {
+    /* 성향이 비슷한 유저 3명 추천 */
+    public List<UserProfileDto> searchSimilarUser(String userId) {
         try {
+            List<UserProfileDto> similarUsers = new ArrayList<>();
             // 나의 Id 기반으로 Category List 조회
             Optional<CategoryList> myList = categoryListRepository.findByUserId(userId);
             // 나를 제외한 User의 Category List 조회
@@ -114,31 +115,43 @@ public class UserService {
                 // 남은 List의 Category 수 세기
                 userSimilarityScores.put(otherUserCategoryList.getUserId(), otherCategories.size());
             }
-            // 총 점수 계산 (이것이 Random 값 범위임)
-            int totalScore = userSimilarityScores.values().stream().mapToInt(Integer::intValue).sum();
 
-            // 총 점수가 양수일 때만 진행 가능
-            if (totalScore > 0) {
-                // 랜덤 값 생성
-                int randomIndex = new Random().nextInt(totalScore);
-                int currentSum = 0;
+            // 3명 찾음
+            for (int i = 0; i < 3; i++) {
+                // 현재 총 점수 계산
+                int totalScore = userSimilarityScores.values().stream().mapToInt(Integer::intValue).sum();
 
-                // 랜덤 값에 따라 유저 하나를 무조건 찾음
-                for (Map.Entry<String, Integer> entry : userSimilarityScores.entrySet()) {
-                    currentSum += entry.getValue();
+                // 점수가 없다면 뽑지 않음 (관심 유저 없음)
+                if (totalScore > 0) {
+                    // 랜덤 뽑기
+                    int randomIndex = new Random().nextInt(totalScore);
+                    int currentSum = 0;
 
-                    // 유저 찾음
-                    if (randomIndex < currentSum) {
-                        String resultUserId = entry.getKey();
-                        Optional<UserEntity> resultUser = repository.findByUserId(resultUserId);
+                    // 점수를 더해가며 랜덤 수와 비교
+                    for (Map.Entry<String, Integer> entry : userSimilarityScores.entrySet()) {
+                        currentSum += entry.getValue();
 
-                        // 유저의 정보 Return
-                        return UserProfileDto.userEntryToDto(resultUser.get());
+                        // 랜덤 수보다 크다면 당첨
+                        // 관심 일치 카테고리가 많을 수록 당첨될 범위가 커짐
+                        if (randomIndex < currentSum) {
+                            String selectedUserId = entry.getKey();
+                            Optional<UserEntity> selectedUser = repository.findByUserId(selectedUserId);
+                            // 선택된 유저 similarUsers에 추가
+                            similarUsers.add(UserProfileDto.userEntryToDto(selectedUser.get()));
+
+                            // 선택된 유저 제거
+                            userSimilarityScores.remove(selectedUserId);
+
+                            break;
+                        }
                     }
+                } else {
+                    // 관심 일치 유저가 없으면 종료함
+                    break;
                 }
             }
 
-            return null;
+            return similarUsers;
         } catch (Exception e) {
             log.info(e.getMessage());
 

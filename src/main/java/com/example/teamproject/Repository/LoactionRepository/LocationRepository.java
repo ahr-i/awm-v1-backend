@@ -12,12 +12,10 @@ import java.util.List;
 @Transactional
 public interface LocationRepository extends JpaRepository<Location,Integer> {
     @Modifying
-    @Transactional
     @Query("update Location l set l.score = l.score + :score where l.locationId = :locationId")
     void updateScore(@Param("locationId") int locationId, @Param("score") int score);
 
     @Modifying
-    @Transactional
     @Query("update Location l set l.visitCount = l.visitCount + 1 where l.locationId = :locationId")
     void upVisitCount(@Param("locationId") int locationId);
 

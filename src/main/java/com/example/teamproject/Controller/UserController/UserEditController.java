@@ -20,14 +20,27 @@ public class UserEditController {
     private final UserService service;
 
     @PostMapping("/profile")
-    public ResponseEntity editUserNickName(@RequestBody UserProfileDto dto, Authentication authentication){
-        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+    public ResponseEntity editUserProfile(@RequestBody UserProfileDto dto, Authentication authentication) {
+        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         Boolean result = service.editNickName(dto, principalDetails.getUserInfo().getUserId());
 
-        if(result) {
+        if (result) {
             return ResponseEntity.ok().body("유저 프로필 변경에 성공했습니다.");
         } else {
             return ResponseEntity.badRequest().body("유저 프로필 변경에 실패했습니다.");
+        }
+    }
+
+    @PostMapping("/category-list")
+    public ResponseEntity editCategoryList(@RequestBody UserProfileDto dto, Authentication authentication) {
+        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+        Boolean result = service.editCategoryList(dto, principalDetails.getUserInfo().getUserId());
+
+        if (result) {
+            return ResponseEntity.ok().body("유저 프로필 변경에 성공했습니다.");
+        } else {
+            return ResponseEntity.badRequest().body("유저 프로필 변경에 실패했습니다.");
+
         }
     }
 }

@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserEditController {
     private final UserService service;
 
+    /* 유저의 프로필 변경 (사진, 닉네임) */
     @PostMapping("/profile")
     public ResponseEntity editUserProfile(@RequestBody UserProfileDto dto, Authentication authentication) {
+        // JWT 파싱
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-        Boolean result = service.editNickName(dto, principalDetails.getUserInfo().getUserId());
+        // 유저 프로필 변경 결과
+        Boolean result = service.editProfile(dto, principalDetails.getUserInfo().getUserId());
 
         if (result) {
             return ResponseEntity.ok().body("유저 프로필 변경에 성공했습니다.");
@@ -31,9 +34,12 @@ public class UserEditController {
         }
     }
 
+    /* 유저의 Category List 설정 */
     @PostMapping("/category-list")
     public ResponseEntity editCategoryList(@RequestBody UserProfileDto dto, Authentication authentication) {
+        // JWT 파싱
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+        // Category List 설정 결과
         Boolean result = service.editCategoryList(dto, principalDetails.getUserInfo().getUserId());
 
         if (result) {

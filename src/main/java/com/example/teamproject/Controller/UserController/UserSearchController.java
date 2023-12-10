@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserSearchController {
     private final UserService service;
 
+    /* 성향이 비슷한 유저 추천 */
     @GetMapping("/similar-user")
     public ResponseEntity editUserNickName(Authentication authentication){
+        // JWT 파싱
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        // 추천 유저 결과
         UserProfileDto response = service.searchSimilarUser(principalDetails.getUserInfo().getUserId());
 
         if(response != null) {

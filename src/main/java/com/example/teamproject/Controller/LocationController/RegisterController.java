@@ -47,4 +47,17 @@ public class RegisterController {
             return ResponseEntity.badRequest().body("장소 추천에 실패했습니다.");
         }
     }
+
+    @PostMapping("/edit")
+    public ResponseEntity editLocation(@RequestBody RegisterDto dto, Authentication authentication){
+        // JWT 파싱
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        Boolean result = service.edit(dto, principalDetails.getUserInfo().getUserId());
+
+        if(result) {
+            return ResponseEntity.ok().body("장소 수정에 성공했습니다.");
+        } else {
+            return ResponseEntity.badRequest().body("장소 수정에 실패했습니다.");
+        }
+    }
 }

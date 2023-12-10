@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class DeleteController {
     private final DeleteService service;
 
+    /* 장소 삭제 */
     @PostMapping("/delete")
     public ResponseEntity deleteLocation(@RequestBody DeleteDto dto){
+        // 장소 삭제의 결과
         Boolean result = service.delete(dto);
 
-        if(true) {
+        if(result) {
             return ResponseEntity.ok().body("장소 삭제에 성공했습니다.");
         } else {
             return ResponseEntity.badRequest().body("장소 삭제에 실패했습니다.");

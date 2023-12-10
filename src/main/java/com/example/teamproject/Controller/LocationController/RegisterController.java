@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
     private final RegisterService service;
 
+    /* 장소 등록 */
     @PostMapping("/register")
     public ResponseEntity registerLocation(@RequestBody RegisterDto dto, Authentication authentication){
+        // JWT 파싱
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        // 장소 등록의 결과
         Boolean result = service.register(dto, principalDetails.getUserInfo().getUserId());
 
         if(result) {

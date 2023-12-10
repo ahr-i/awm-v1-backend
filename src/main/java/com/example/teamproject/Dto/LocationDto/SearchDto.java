@@ -10,6 +10,7 @@ public class SearchDto {
     private double longitude;
     private double range;
     private double minRange;
+    private String category;
 
     private double minLatitudeRange;
     private double maxLatitudeRange;

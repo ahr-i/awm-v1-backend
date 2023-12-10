@@ -101,8 +101,10 @@ public class RegisterService {
         }
     }
 
+    /* 장소 추천 */
     public boolean agree(LocationDto dto) {
         try {
+            // 기존의 장소 Id
             int existingLocationId = dto.getLocationId();
 
             // 기존의 장소가 있는 경우
@@ -118,6 +120,7 @@ public class RegisterService {
         }
     }
 
+    /* 장소 정보 수정 및 추가 */
     public boolean edit(RegisterDto dto, String userId) {
         try {
             dto.setUserId(userId);

@@ -36,9 +36,10 @@ public class RegisterController {
         }
     }
 
+    /* 장소 추천 */
     @PostMapping("/agree")
     public ResponseEntity agreeLocation(@RequestBody LocationDto dto){
-        // JWT 파싱
+        // 추천 결과
         Boolean result = service.agree(dto);
 
         if(result) {
@@ -48,10 +49,12 @@ public class RegisterController {
         }
     }
 
+    /* 장소 title, image 수정 및 추가 */
     @PostMapping("/edit")
     public ResponseEntity editLocation(@RequestBody RegisterDto dto, Authentication authentication){
         // JWT 파싱
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        // 수정 및 추가 결과
         Boolean result = service.edit(dto, principalDetails.getUserInfo().getUserId());
 
         if(result) {

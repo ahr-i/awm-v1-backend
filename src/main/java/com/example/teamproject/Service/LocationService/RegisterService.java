@@ -117,4 +117,55 @@ public class RegisterService {
             return false;
         }
     }
+
+    public boolean edit(RegisterDto dto, String userId) {
+        try {
+            dto.setUserId(userId);
+
+            Contributor contributor = RegisterDto.toContributor(dto);
+            int existingLocationId = dto.getLocationId();
+
+            // 기존의 장소가 있는 경우
+            if(existingLocationId != 0) {
+                // 기존 장소 검색
+                Optional<Location> existingLocation = locationRepository.findById(existingLocationId);
+
+                // 기존 장소가 있을 경우 UPDATE 진행
+                if (existingLocation.isPresent()) {
+                    Location updatedLocation = existingLocation.get();
+
+                    // Titl, Description 최신으로 변경
+                    updatedLocation.setTitle(dto.getTitle());
+                    updatedLocation.setDescription(dto.getDescription());
+
+                    locationRepository.save(updatedLocation);
+                }
+            }
+
+            // Dto에 이미지가 존재하는 경우
+            if(dto.getImage() != null) {
+                LocationImage locationImage = RegisterDto.toLocationImage(dto);
+
+                locationImage.setLocationId(existingLocationId);
+
+                // 이미지 등록
+                locationImageRepository.save(locationImage);
+            }
+            // Contributor 등록
+            contributor.setLocationId(existingLocationId);
+            contributor.setRate(setting.getUserRate());
+
+            // DB에 저장
+            locationRepository.updateScore(existingLocationId, setting.getRegisterBaseScore());
+            contributorRepository.save(contributor);
+            userRepository.updateUserRank(userId);
+
+            // 성공적으로 등록
+            return true;
+        } catch (Exception e) {
+            log.info(e.getMessage());
+
+            return false;
+        }
+    }
 }

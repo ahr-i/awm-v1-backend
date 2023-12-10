@@ -16,6 +16,7 @@ public class RegisterDto {
     private String title;
     private String description;
     private String image;
+    private int locationId;
 
     static public Location toLocation(RegisterDto dto) {
         Location location = new Location();

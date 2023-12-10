@@ -1,4 +1,4 @@
-# USER TABLE
+# USER TABLE - 수정 필요
 
 ## 1. user
 | Name | Type | Indexes | Option |

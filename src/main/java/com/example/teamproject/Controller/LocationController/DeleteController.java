@@ -1,6 +1,7 @@
 package com.example.teamproject.Controller.LocationController;
 
 import com.example.teamproject.Dto.LocationDto.DeleteDto;
+import com.example.teamproject.Dto.LocationDto.LocationDto;
 import com.example.teamproject.Dto.LocationDto.RegisterDto;
 import com.example.teamproject.Service.LocationService.DeleteService;
 import com.example.teamproject.Service.LocationService.RegisterService;
@@ -23,7 +24,7 @@ public class DeleteController {
 
     /* 장소 삭제 */
     @PostMapping("/delete")
-    public ResponseEntity deleteLocation(@RequestBody DeleteDto dto){
+    public ResponseEntity deleteLocation(@RequestBody LocationDto dto){
         // 장소 삭제의 결과
         Boolean result = service.delete(dto);
 

@@ -1,6 +1,8 @@
 package com.example.teamproject.Controller.LocationController;
 
+import com.example.teamproject.Dto.LocationDto.LocationDto;
 import com.example.teamproject.Dto.LocationDto.RegisterDto;
+import com.example.teamproject.JpaClass.LocationTable.Location;
 import com.example.teamproject.Service.LocationService.RegisterService;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,18 @@ public class RegisterController {
             return ResponseEntity.ok().body("장소 등록에 성공했습니다.");
         } else {
             return ResponseEntity.badRequest().body("장소 등록에 실패했습니다.");
+        }
+    }
+
+    @PostMapping("/agree")
+    public ResponseEntity agreeLocation(@RequestBody LocationDto dto){
+        // JWT 파싱
+        Boolean result = service.agree(dto);
+
+        if(result) {
+            return ResponseEntity.ok().body("장소 추천에 성공했습니다.");
+        } else {
+            return ResponseEntity.badRequest().body("장소 추천에 실패했습니다.");
         }
     }
 }

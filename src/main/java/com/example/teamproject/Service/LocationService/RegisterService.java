@@ -1,5 +1,6 @@
 package com.example.teamproject.Service.LocationService;
 
+import com.example.teamproject.Dto.LocationDto.LocationDto;
 import com.example.teamproject.Dto.LocationDto.RegisterDto;
 import com.example.teamproject.JpaClass.LocationTable.Contributor;
 import com.example.teamproject.JpaClass.LocationTable.Location;
@@ -97,6 +98,23 @@ public class RegisterService {
         } else {
             // 일치하는 장소가 없는 경우
             return -1;
+        }
+    }
+
+    public boolean agree(LocationDto dto) {
+        try {
+            int existingLocationId = dto.getLocationId();
+
+            // 기존의 장소가 있는 경우
+            if(existingLocationId != 0) {
+                locationRepository.updateScore(existingLocationId, setting.getRegisterBaseScore());
+            }
+
+            return true;
+        } catch (Exception e) {
+            log.info(e.getMessage());
+
+            return false;
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.teamproject.Service.LocationService;
 
 import com.example.teamproject.Dto.LocationDto.DeleteDto;
+import com.example.teamproject.Dto.LocationDto.LocationDto;
 import com.example.teamproject.Dto.LocationDto.RegisterDto;
 import com.example.teamproject.JpaClass.LocationTable.Contributor;
 import com.example.teamproject.JpaClass.LocationTable.Location;
@@ -22,14 +23,14 @@ public class DeleteService {
     private final LocationSetting setting;
 
     /* 기존 장소 삭제 */
-    public boolean delete(DeleteDto dto) {
+    public boolean delete(LocationDto dto) {
         try {
             // latitude, longitude, category를 통해 기존 장소가 있는지 검색
-            int existingLocationId = getLocationId(dto.getLatitude(), dto.getLongitude(), dto.getCategory());
+            int existingLocationId = dto.getLocationId();
 
             // 기존 장소가 있는 경우
             // 점수를 차감시킴
-            if(existingLocationId != -1) {
+            if(existingLocationId != 0) {
                 locationRepository.updateScore(existingLocationId, setting.getDeleteBaseScore());
                 //log.info("locationId: {}", existingLocationId);
 

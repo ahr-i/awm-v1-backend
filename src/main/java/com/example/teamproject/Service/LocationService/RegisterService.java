@@ -4,6 +4,8 @@ import com.example.teamproject.Dto.LocationDto.RegisterDto;
 import com.example.teamproject.JpaClass.LocationTable.Contributor;
 import com.example.teamproject.JpaClass.LocationTable.Location;
 import com.example.teamproject.JpaClass.LocationTable.LocationImage;
+import com.example.teamproject.JpaClass.UserTable.UserEntity;
+import com.example.teamproject.Repository.JpaRepository.UserRepository;
 import com.example.teamproject.Repository.LoactionRepository.ContributorRepository;
 import com.example.teamproject.Repository.LoactionRepository.LocationImageRepository;
 import com.example.teamproject.Repository.LoactionRepository.LocationRepository;
@@ -23,6 +25,7 @@ public class RegisterService {
     private final LocationRepository locationRepository;
     private final ContributorRepository contributorRepository;
     private final LocationImageRepository locationImageRepository;
+    private final UserRepository userRepository;
     private final LocationSetting setting;
 
     public boolean register(RegisterDto dto, String userId) {
@@ -62,6 +65,7 @@ public class RegisterService {
 
             locationRepository.updateScore(locationId, setting.getRegisterBaseScore());
             contributorRepository.save(contributor);
+            userRepository.updateUserRank(userId);
 
             return true;
         } catch (Exception e) {

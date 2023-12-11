@@ -84,10 +84,12 @@ public class BoardDto {
             return dto;
         });
     }
-    public static BoardEntity updatePost(BoardDto dto,BoardEntity entity) throws IOException {
+    public static BoardEntity updatePost(BoardDto dto,BoardEntity entity,MultipartFile file) throws IOException {
         entity.setBoardTitle(dto.getBoardTitle());
         entity.setBoardContent(dto.getBoardContent());
-
+        entity.setBoardWriter(dto.getBoardWriter());
+        if(file == null) entity.setImageFile(null);
+        else entity.setImageFile(file.getBytes());
         return entity;
     }
 }

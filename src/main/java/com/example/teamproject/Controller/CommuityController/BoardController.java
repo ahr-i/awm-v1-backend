@@ -15,7 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -49,33 +52,22 @@ public class BoardController {
         return responseEntity;
     }
 
-    //글 수정
-    @GetMapping("/user/update/{postId}")
-    public ResponseEntity updateBoard(@PathVariable int postId,Authentication authentication){
-
-        BoardEntity boardUser = service.updateFindByPost(postId);
-        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-
-        if(principal.getUserInfo().getUserId().equals(boardUser.getUserId())) {
-            BoardDto dto = BoardDto.DetailToBoardDto(boardUser);
-            return ResponseEntity.ok().body(dto);
-
-        }else if(boardUser == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
     @PostMapping("/user/update/{postId}")
-    public ResponseEntity updateBoardDto(@PathVariable int postId,@RequestBody BoardDto dto) {
+    public ResponseEntity updateBoardDto(@PathVariable int postId, @RequestPart("dto") BoardDto dto
+                                         , @RequestPart(value = "file",required = false)MultipartFile file,
+                                         Authentication authentication) {
 
-        try {
-            BoardEntity entity = service.updatePost(dto);
+        Optional<BoardEntity> board = service.findBoard(postId);
 
-            if(entity != null) {
-                return ResponseEntity.ok().body("글 수정이 완료 되었습니다.");
-            }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("글 수정이 완료되지 않았습니다.");
-        }catch (IOException e){
-            log.info("파일 용량 초과");
-        }
-       return null;
+        if(!board.isEmpty()) {
+            PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+            String userId = principal.getUserInfo().getUserId();
+            if(!userId.equals(board.get().getUserId())) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("글 작성자가 아닙니다");
+        }else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("삭제된 글이거나 글을 찾을 수 없습니다.");
+
+        service.updatePost(dto, file, postId);
+         return ResponseEntity.ok("글 등록이 정상적으로 되었습니다.");
+
     }
 
 

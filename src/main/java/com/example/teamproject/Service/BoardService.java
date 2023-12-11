@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,12 @@ public class BoardService {
     private final LocationRepository locationRepository;
     private final UserPostRepository logBoardRepository;
     private final LogBoardCountEntityRepository logBoardCountEntityRepository;
+
+    public Optional<BoardEntity> findBoard(int postId){
+        Optional<BoardEntity> byId = repository.findById(postId);
+        if(byId.isPresent()) return byId;
+        else return null;
+    }
 
     public ResponseEntity BoardSave(BoardDto dto, int locationId, MultipartFile file, Authentication authentication) {
         try {
@@ -129,24 +136,18 @@ public class BoardService {
 
     }
 
-    public BoardEntity updatePost(BoardDto dto) throws IOException {
-        Optional<BoardEntity> byId = repository.findById(dto.getPostId());
-
-        if (byId.isPresent()) {
-            BoardEntity entity = byId.get();
-            BoardEntity saveentity = BoardDto.updatePost(dto, byId.get());
-            repository.save(saveentity);
-            return byId.get();
-        }
-        return null;
-    }
-
-    public BoardEntity updateFindByPost(int postId) {
+    public void updatePost(BoardDto dto, MultipartFile file, int postId) {
         Optional<BoardEntity> byId = repository.findById(postId);
+        try {
 
-        if (byId.isPresent()) {
-            return byId.get();
-        } else return null;
+                BoardEntity updateBoard = BoardDto.updatePost(dto, byId.get(),file);
+                repository.save(updateBoard);
+
+
+        }catch (IOException e) {
+            log.info("용량 초과");
+        }
+
     }
 
     /**

@@ -44,8 +44,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         try{
             registry.addEndpoint("/connection")
-                    .setAllowedOriginPatterns("*")
-                    .withSockJS(); // SockJS를 사용하는 경우에만 주석 해제
+                    .setAllowedOriginPatterns("*");
+                    //.withSockJS(); // SockJS를 사용하는 경우에만 주석 해제
         } catch (Exception e){
             log.error("Error during WebSocket handshake:", e);
         }

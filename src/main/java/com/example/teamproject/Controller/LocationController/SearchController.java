@@ -20,8 +20,10 @@ import java.util.List;
 public class SearchController {
     private final SearchService service;
 
+    /* range 범위에 따른 모든 장소 검색 */
     @GetMapping("/in-range")
     public ResponseEntity searchInRangeLocation(@ModelAttribute SearchDto dto) {
+        // 범위 검색 결과
         List<LocationDto> response = service.findInRange(dto);
 
         if(response != null) {
@@ -31,8 +33,10 @@ public class SearchController {
         }
     }
 
+    /* Max Range 안에서 Min Range를 제외한 범위 검색 */
     @GetMapping("/within-range")
     public ResponseEntity searchWithinRangeLocation(@ModelAttribute SearchDto dto) {
+        // 범위 검색 결과
         List<LocationDto> response = service.findWithinRange(dto);
 
         if(response != null) {
@@ -42,8 +46,10 @@ public class SearchController {
         }
     }
 
+    /* 장소의 Information 조회 (title, description, images) */
     @GetMapping("/information")
     public ResponseEntity searchLocationInformation(@ModelAttribute SearchInformationDto dto) {
+        // 장소의 Information 조회 결과
         InformationDto response = service.findLocationInformation(dto);
 
         if(response != null) {
@@ -53,8 +59,10 @@ public class SearchController {
         }
     }
 
+    /* latitude, longitude, category를 기반으로 locationId 반환 */
     @GetMapping("/get-location-id")
     public ResponseEntity searchLocationId(@ModelAttribute SearchInformationDto dto) {
+        // locationId 검색 결과
         LocationDto response = service.findLocationId(dto);
 
         if(response != null) {
@@ -64,16 +72,16 @@ public class SearchController {
         }
     }
 
-    /*
-    @GetMapping("/images")
-    public ResponseEntity searchLocationImages(@ModelAttribute SearchInformationDto dto) {
-        List<ImageDto> response = service.findImages(dto);
+    /* category, 현재 위치, ragne를 기반으로 장소 추천 */
+    @GetMapping("/recommend-location")
+    public ResponseEntity recommendLocation(@ModelAttribute SearchDto dto) {
+        // 추천 결과
+        LocationDto response = service.recommendLocation(dto);
 
         if(response != null) {
             return ResponseEntity.ok().body(response);
         } else {
-            return ResponseEntity.badRequest().body("해당하는 장소가 없습니다.");
+            return ResponseEntity.badRequest().body("추천할 장소가 없습니다.");
         }
     }
-    */
 }

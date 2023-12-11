@@ -1,6 +1,5 @@
 package com.example.teamproject.Service.SpringSecurityLogin;
-import com.example.teamproject.Dto.UserDto;
-import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
+import com.example.teamproject.Dto.UserDto.UserDto;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

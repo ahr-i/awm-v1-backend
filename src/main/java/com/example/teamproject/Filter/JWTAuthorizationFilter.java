@@ -1,7 +1,7 @@
 package com.example.teamproject.Filter;
 
 
-import com.example.teamproject.Dto.UserDto;
+import com.example.teamproject.Dto.UserDto.UserDto;
 import com.example.teamproject.JWT.JWTUtil;
 import com.example.teamproject.JpaClass.UserTable.Oauth2UserEntity;
 import com.example.teamproject.JpaClass.UserTable.UserEntity;

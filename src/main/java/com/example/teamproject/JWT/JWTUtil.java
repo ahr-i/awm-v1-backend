@@ -1,20 +1,16 @@
 package com.example.teamproject.JWT;
 
-import com.example.teamproject.Dto.UserDto;
+import com.example.teamproject.Dto.UserDto.UserDto;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
-import com.nimbusds.oauth2.sdk.http.HTTPResponse;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 @Slf4j
 

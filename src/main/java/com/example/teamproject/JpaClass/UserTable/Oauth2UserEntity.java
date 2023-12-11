@@ -1,7 +1,7 @@
 package com.example.teamproject.JpaClass.UserTable;
 
-import com.example.teamproject.Dto.CharacterName;
-import com.example.teamproject.Dto.UserDto;
+import com.example.teamproject.Dto.UserDto.CharacterName;
+import com.example.teamproject.Dto.UserDto.UserDto;
 import com.example.teamproject.prvoider.Oauth2UserInfo;
 import lombok.Data;
 

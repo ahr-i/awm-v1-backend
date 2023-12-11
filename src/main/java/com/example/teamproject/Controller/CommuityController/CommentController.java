@@ -2,7 +2,7 @@ package com.example.teamproject.Controller.CommuityController;
 
 
 import com.example.teamproject.Dto.CommuityDto.BoardDto.CommentDto;
-import com.example.teamproject.Service.CommentService;
+import com.example.teamproject.Service.CommunityService.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

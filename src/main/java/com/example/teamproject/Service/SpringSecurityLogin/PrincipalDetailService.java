@@ -1,5 +1,5 @@
 package com.example.teamproject.Service.SpringSecurityLogin;
-import com.example.teamproject.Dto.UserDto;
+import com.example.teamproject.Dto.UserDto.UserDto;
 import com.example.teamproject.JpaClass.UserTable.UserEntity;
 import com.example.teamproject.Repository.JpaRepository.UserRepository;
 import lombok.RequiredArgsConstructor;

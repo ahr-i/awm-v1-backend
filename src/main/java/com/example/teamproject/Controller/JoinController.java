@@ -1,8 +1,8 @@
 package com.example.teamproject.Controller;
 
-import com.example.teamproject.Dto.UserDto;
+import com.example.teamproject.Dto.UserDto.UserDto;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
-import com.example.teamproject.Service.UserService;
+import com.example.teamproject.Service.UserService.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

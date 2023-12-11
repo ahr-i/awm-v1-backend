@@ -5,7 +5,7 @@ package com.example.teamproject.Controller.CommuityController;
 import com.example.teamproject.Dto.CommuityDto.BoardDto.BoardDto;
 import com.example.teamproject.Dto.CommuityDto.BoardDto.UserLogDto;
 import com.example.teamproject.JpaClass.CommunityTable.BoardEntity;
-import com.example.teamproject.Service.BoardService;
+import com.example.teamproject.Service.CommunityService.BoardService;
 import com.example.teamproject.Service.SpringSecurityLogin.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,34 +49,18 @@ public class BoardController {
         return responseEntity;
     }
 
-    //글 수정
-    @GetMapping("/user/update/{postId}")
-    public ResponseEntity updateBoard(@PathVariable int postId,Authentication authentication){
 
-        BoardEntity boardUser = service.updateFindByPost(postId);
-        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-
-        if(principal.getUserInfo().getUserId().equals(boardUser.getUserId())) {
-            BoardDto dto = BoardDto.DetailToBoardDto(boardUser);
-            return ResponseEntity.ok().body(dto);
-
-        }else if(boardUser == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
     @PostMapping("/user/update/{postId}")
-    public ResponseEntity updateBoardDto(@PathVariable int postId,@RequestBody BoardDto dto) {
+    public ResponseEntity updateBoardDto(@PathVariable int postId,@RequestPart("dto") BoardDto dto
+    ,@RequestPart(value = "file",required = false)MultipartFile file,Authentication authentication) throws IOException
+    {
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+        principal.getUserInfo().getUserId();
+        ResponseEntity responseEntity = service.updatePost(dto, file, postId, authentication);
 
-        try {
-            BoardEntity entity = service.updatePost(dto);
-
-            if(entity != null) {
-                return ResponseEntity.ok().body("글 수정이 완료 되었습니다.");
-            }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("글 수정이 완료되지 않았습니다.");
-        }catch (IOException e){
-            log.info("파일 용량 초과");
-        }
-       return null;
+        return responseEntity;
     }
+
 
 
     @GetMapping("/board/paging/{locationId}")

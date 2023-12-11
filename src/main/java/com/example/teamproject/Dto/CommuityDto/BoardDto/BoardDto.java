@@ -84,10 +84,17 @@ public class BoardDto {
             return dto;
         });
     }
-    public static BoardEntity updatePost(BoardDto dto,BoardEntity entity) throws IOException {
-        entity.setBoardTitle(dto.getBoardTitle());
-        entity.setBoardContent(dto.getBoardContent());
+    public static BoardEntity updatePost(BoardDto dto,BoardEntity entity,MultipartFile file) throws IOException {
 
-        return entity;
+        try {
+            entity.setBoardTitle(dto.getBoardTitle());
+            entity.setBoardContent(dto.getBoardContent());
+            if(file == null) entity.setImageFile(null);
+            else entity.setImageFile(file.getBytes());
+
+            return entity;
+        }catch (IOException e) {
+            throw new IOException("파일 용량 초과");
+        }
     }
 }
